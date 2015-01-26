@@ -97,50 +97,44 @@
         var nextMonth5List = new List<dynamic>();
     }  
 
-  	<div class="span12 columnWrapper">
-			@foreach (var item in GetLoop("ItemPublisher:Items.List")){
-	
-				foreach (var eventItem in item.GetLoop("ItemPublisher:Item.Events")){
-			
-					foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
-
-  						<div>
-		
-  							@{
-                          		//find the month and day for each course
-  								int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
-                          		int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
-  							}
-               			</div>
-						//if the month of the course is the same as this as thisMonth
-            	 		if (thisMonth == courseMonth) {
-      						//if we have not passed the day
-                        	if (thisDay <= courseDay) {
-         
-	                    		<div>
-                              		@{
-      									//there is courses held this month, so the month should be shown
-      									showThisMonth = true;  
+    <div class="span12 columnWrapper">
+        @foreach (var item in GetLoop("ItemPublisher:Items.List")){
+	    foreach (var eventItem in item.GetLoop("ItemPublisher:Item.Events")){
+	        foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
+  		    <div>
+  		        @{
+                            //find the month and day for each course
+  			    int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
+                            int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
+  			}
+               	    </div>
+		    //if the month of the course is the same as this as thisMonth
+            	    if (thisMonth == courseMonth) {
+      		        //if we have not passed the day
+                        if (thisDay <= courseDay) {
+                            <div>
+                                @{
+      			            //there is courses held this month, so the month should be shown
+      			            showThisMonth = true;  
       
-      									//Add to the list of the month                        
-                              			thisMonthList.Add(new {
-                              				Name = item.GetValue("ItemPublisher:Item.Name.Value"),
-                              				Date = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("MMM dd"),
-                              				Location = eventItem.GetValue("ItemPublisher:Item.Events.Location.Value"),
-                              				Price = eventItem.GetValue("ItemPublisher:Item.Events.Price.Value"),
-                              				Day = courseDay,
-      										SignupDate = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("dd/MM/yyyy"),
-      										Url = item.GetString("ItemPublisher:Item.Url"),
-      										Status = eventItem.GetValue("ItemPublisher:Item.Events.Closed.Value")
-                              			});    
-
-                              		}
-                      			</div> 
-        					}
-            			}
-  					}		
-  				}
-        	}
+      			            //Add to the list of the month                        
+                                    thisMonthList.Add(new {
+                                        Name = item.GetValue("ItemPublisher:Item.Name.Value"),
+                              	        Date = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("MMM dd"),
+                              	        Location = eventItem.GetValue("ItemPublisher:Item.Events.Location.Value"),
+                              	        Price = eventItem.GetValue("ItemPublisher:Item.Events.Price.Value"),
+                              	        Day = courseDay,
+      				        SignupDate = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("dd/MM/yyyy"),
+      				        Url = item.GetString("ItemPublisher:Item.Url"),
+      				        Status = eventItem.GetValue("ItemPublisher:Item.Events.Closed.Value")
+                                    });    
+                                }
+                            </div> 
+        		}
+            	    }
+  		}		
+  	    }
+        }
                      
           
 			@foreach (var item2 in GetLoop("ItemPublisher:Items.List")){
