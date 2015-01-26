@@ -240,51 +240,40 @@
 	    }
         }                     
 
-  
-			@foreach (var item5 in GetLoop("ItemPublisher:Items.List")){
-	
-				foreach (var eventItem in item5.GetLoop("ItemPublisher:Item.Events")){
-			
-					foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
-
-  						<div>
-		
-  							@{
-                          		//find the month and day for each course
-  								int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
-  								int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
-  							}
-                		
-          				</div>
-  
-      					//if the month of the course is the same as this as nextMonth4
-           				if (nextMonth4 == courseMonth) {
-							<div>
-                              @{
-                              	//there is courses held this month, so the month should be shown
-								showNextMonth4 = true;
+        @foreach (var item5 in GetLoop("ItemPublisher:Items.List")){
+	    foreach (var eventItem in item5.GetLoop("ItemPublisher:Item.Events")){
+		foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
+                    <div>
+		        @{
+                            //find the month and day for each course
+  			    int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
+  		            int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
+  			}
+                    </div>
+                    //if the month of the course is the same as this as nextMonth4
+           	    if (nextMonth4 == courseMonth) {
+			<div>
+                            @{
+                                //there is courses held this month, so the month should be shown
+				showNextMonth4 = true;
   
                               	//Add to the list of the month 
-  								nextMonth4List.Add(new {
-                              		Name = item5.GetValue("ItemPublisher:Item.Name.Value"),
-                              		Date = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("MMM dd"),
-                              		Location = eventItem.GetValue("ItemPublisher:Item.Events.Location.Value"),
-                              		Price = eventItem.GetValue("ItemPublisher:Item.Events.Price.Value"),
-                              		Day = courseDay,
-                              		SignupDate = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("dd/MM/yyyy"),
-                              		Url = item5.GetString("ItemPublisher:Item.Url"),
-      								Status = eventItem.GetValue("ItemPublisher:Item.Events.Closed.Value")
+  				    nextMonth4List.Add(new {
+                              	    Name = item5.GetValue("ItemPublisher:Item.Name.Value"),
+                              	    Date = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("MMM dd"),
+                              	    Location = eventItem.GetValue("ItemPublisher:Item.Events.Location.Value"),
+                              	    Price = eventItem.GetValue("ItemPublisher:Item.Events.Price.Value"),
+                              	    Day = courseDay,
+                              	    SignupDate = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("dd/MM/yyyy"),
+                              	    Url = item5.GetString("ItemPublisher:Item.Url"),
+      				    Status = eventItem.GetValue("ItemPublisher:Item.Events.Closed.Value")
                               	});
-                              }
-                      		</div>
-
-            	 		}
-
-  					}
-		
-  				}
-
-       		 }
+                            }
+                      	</div>
+                    }
+                }
+            }
+        }
                      
   
 			@foreach (var item6 in GetLoop("ItemPublisher:Items.List")){
