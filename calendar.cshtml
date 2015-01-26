@@ -65,39 +65,37 @@
 
 </style>
 
-
 <div class="row">
-    
-	@{
-  		//find the date of today
-  		DateTime now = DateTime.Now;
-  		//find the day of day of today
-  		int thisDay = now.Day;
-  		//find the month of today and use modulus operator because there is only twelve month
-  		int thisMonth = (now.Month) %12;
-  		//find the next five months
-  		int nextMonth = (thisMonth + 1) %12;
-  		int nextMonth2 = (thisMonth +2) %12;
-  		int nextMonth3 = (thisMonth +3) %12;
-  		int nextMonth4 = (thisMonth +4) %12;
-  		int nextMonth5 = (thisMonth +5) %12;
+    @{
+        //find the date of today
+        DateTime now = DateTime.Now;
+        //find the day of day of today
+        int thisDay = now.Day;
+        //find the month of today and use modulus operator because there is only twelve month
+        int thisMonth = (now.Month) %12;
+        //find the next five months
+        int nextMonth = (thisMonth + 1) %12;
+        int nextMonth2 = (thisMonth +2) %12;
+        int nextMonth3 = (thisMonth +3) %12;
+        int nextMonth4 = (thisMonth +4) %12;
+        int nextMonth5 = (thisMonth +5) %12;
   
-		//booleans used two find out whether the month should be displayed
-		bool showThisMonth = false;
-  		bool showNextMonth = false;
-  		bool showNextMonth2 = false;
-  		bool showNextMonth3 = false;
-  		bool showNextMonth4 = false;
-  		bool showNextMonth5 = false;
+        //booleans used two find out whether the month should be displayed
+        bool showThisMonth = false;
+        bool showNextMonth = false;
+        bool showNextMonth2 = false;
+        bool showNextMonth3 = false;
+        bool showNextMonth4 = false;
+        bool showNextMonth5 = false;
   
-		//create a list for each month  
-  		var thisMonthList = new List<dynamic>();
-  		var nextMonthList = new List<dynamic>();
-  		var nextMonth2List = new List<dynamic>();
-  		var nextMonth3List = new List<dynamic>();
-  		var nextMonth4List = new List<dynamic>();
-  		var nextMonth5List = new List<dynamic>();
-  	}  
+        //create a list for each month  
+        var thisMonthList = new List<dynamic>();
+        var nextMonthList = new List<dynamic>();
+        var nextMonth2List = new List<dynamic>();
+        var nextMonth3List = new List<dynamic>();
+        var nextMonth4List = new List<dynamic>();
+        var nextMonth5List = new List<dynamic>();
+    }  
 
   	<div class="span12 columnWrapper">
 			@foreach (var item in GetLoop("ItemPublisher:Items.List")){
