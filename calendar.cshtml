@@ -310,14 +310,13 @@
             }
         }
                              
-                          
-		@if (showThisMonth == true) {
+        @if (showThisMonth == true) {
             <table class="course span12">
-              	<!--show the name of the current month-->
+                <!--show the name of the current month-->
                 <th colspan="10">@now.ToString("MMMM")</th>
              
                 @{
-              		//sort list after day in month
+              	    //sort list after day in month
                     thisMonthList.Sort((x, y) => x.Day.CompareTo(y.Day));
                 }
                      
@@ -327,12 +326,12 @@
                         <td>@course.Date,</td>
                       	<td>@course.Location</td>
                         <td>@course.Price</td> 
-      					@if (course.Status == false) {
-                        	<td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
-      					}
-      					else {
-      						<td>Closed</td>
-      					}     
+      			@if (course.Status == false) {
+                            <td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
+      			}
+      			else {
+      			    <td>Closed</td>
+      			}     
                     </tr>
                 }                              
             </table>
