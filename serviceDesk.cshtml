@@ -1,0 +1,512 @@
+@using System.Web.Helpers;
+
+<link rel="stylesheet" type="text/css" href="/Files/Templates/Designs/espresso/scss/custom/engage_styles.css">
+<style type="text/css">
+
+
+    button[type="submit"] {
+        position: relative;
+        float: right;
+        left: -41%;
+    }
+
+    button[type="reset"] {
+        position: relative;
+        float: right;
+        left: -41%;
+        margin-right: 4px;
+    }
+  
+  	.nomargin {
+		margin-left: 0px;
+  	}
+
+</style>
+<!--create new list-->  
+@{
+  	List<string> solutionsList = new List<string>();
+}  
+
+<!--Add relevant variables to list-->  
+@foreach (var i in GetLoop("SolutionsLoop")){
+  	var costumerName = i.GetString("SolutionCustomerName");
+  	var solutionName = i.GetString("SolutionName");
+  	var solutionId = i.GetString("SolutionID");
+  	var toList = costumerName +"|" + solutionName + "|" + solutionId;
+  
+	solutionsList.Add(toList);
+   
+}
+    
+
+<!--convert list to array-->  
+@{
+string[] solutionsArray = solutionsList.ToArray();     
+}
+  
+    <div id="form" class="span12 nomargin">
+      <form onsubmit="return validate()" style="width:100%" method="post" class="form-horizontal" action="/service-desk/your-cases" enctype="multipart/form-data">
+            <input type="hidden" id="businessImpactDescription" name="businessImpactDescription" value="" />
+        	<input type="hidden" id="caseType" name="caseType" value ="2"/>
+          	<input type="hidden" id="id" name="id" value="" />
+        
+            <div class="control-group">
+                <label class="control-label" for="title">Title</label>
+                <div class="controls">
+                    <input id="title" name="title" class="span6" onchange="validateTitle()" type="text" />
+                    <div id="markBoxTitle" class="help-inline"></div>
+                    <span id="errorTitle" class="help-inline"></span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="customer">Customer</label>
+                <div class="controls">
+                    <select id="customer" class="span6" name="customer" onchange="validateCostumer();solutionOptions(this);validateSolutions()">
+
+                        <option id="startOptionCostumer" value="startOptionCostumer">Please select</option>
+						@foreach (var i in GetLoop("CustomersLoop")){
+
+                        <option value="@i.GetValue("CustomerName")">
+                            @i.GetValue("CustomerName")
+                
+                        </option>
+ 
+                        }
+
+                    </select>
+                    <div id="markBoxCostumer" class="help-inline"></div>
+                    <span id="errorCostumer" class="help-inline"></span>
+                </div>
+            </div>
+      
+   
+        <div class="control-group">
+                <label class="control-label" for="solutions">Solution</label>
+                <div class="controls">
+                    <select id="solutions" class="span6" name="solutions" onchange="validateSolutions()">
+                        <option id="startOptionSolutions" value="startOptionSolutions">Please select</option>
+                    
+						<!--here more options is made in javascript-->
+                    </select>
+                    <div id="markBoxSolutions" class="help-inline"></div>
+                    <span id="errorSolutions" class="help-inline"></span>
+                </div>
+            </div>
+              
+    
+
+            <div id="why" class="control-group">
+                <label class="control-label" for="textareaWhy" id="whylabel">What is the impact for the customer?</label>
+                <div class="controls">
+                    <textarea name="textareaWhy" id="textareaWhy" class="span6" cols="80" onchange="validateWhy()"rows="4"></textarea>
+                    <div id="markBoxWhy" class="help-inline"></div>
+                    <span id="errorWhy" class="help-inline"></span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label id="URLtekst" class="control-label" for="solutionUrl">URL</label>
+                <div class="controls">
+                    <input id="solutionUrl" name="solutionUrl" class="span6" type="text" onchange="validateURL()" placeholder="URL to page with problems" />
+                    <div id="markBoxURL" class="help-inline"></div>
+                    <span id="errorURL" class="help-inline"></span>
+                </div>
+            </div>
+
+
+            <div class="control-group">
+                <label class="control-label" for="description">Description</label>
+                <div class="controls">
+                    <textarea id="description" name="description" class="span6" cols="50" onchange="validateDescription()" rows="6"></textarea>
+                    <div id="markBoxDescription" class="help-inline"></div>
+                    <span id="errorDescription" class="help-inline"></span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="textareaSteps">Steps</label>
+                <div class="controls">
+                    <textarea id="steps" name="steps" class="span6" cols="50" onchange="validateSteps()" placeholder="Please write steps to reproduce the problem" rows="6"></textarea>
+                    <div id="markBoxSteps" class="help-inline"></div>
+                    <span id="errorSteps" class="help-inline"></span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="attachments">Attachments</label>
+                <div class="controls">
+                    <input id="attachments" name="attachments" class="span6" type="file" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" name="cmd" value="saveCase" class="btn btn-primary" onclick="setValues()">Submit</button>
+                    <button type="reset" class="btn" onclick="resetValidation()">Reset</button>
+                </div>
+            </div>
+  
+
+        </form>
+    </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    //regular expression to check if a URL is valid
+  	var RegExpURL = /\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.]|[a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i;  
+  // var RegExp = /\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.]|[a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i;
+
+	//regular expression to check if a string is empty 
+	var emptyString = /^$/;
+  
+    //regular expression to check if a string contains white space
+    var whiteSpace = /\s/;
+  
+    var signGreen = "<img style='width:15px;' src='/Files/Images/icons-blue/engage_checkmark.jpg'>"
+    var signRed = "<img src='/Files/Images/icons-blue/red_x.png'>"
+
+    //booleans to check if fields have been changed
+    submitCostumer = false;
+    submitSolutions = false;
+  	submitWhy = false;
+    submitTitle = false;
+    submitURL = false;
+    submitDescription = false;
+    submitSteps = false;
+  
+    //boolean useed in the function "validation" to check if it is OK to submit
+    submitOK = false;
+  
+  	
+    function solutionOptions(input) {
+  		//convert C# array to JavaScript array
+  		var jsArray = @Raw(Json.Encode(@solutionsArray));
+  
+  		var costumer = input.value;
+  		var selectTag = document.getElementById("solutions"); 		
+  		var classCostumerOption = document.getElementsByClassName("costumerOption");
+  
+  		//create new array
+		var elementsToRemove = [];
+  
+        //place existing options in new array
+		for (var i = 0; i < classCostumerOption.length; i++) {
+        	elementsToRemove.push(classCostumerOption[i]);
+    	}
+  
+		//remove existing options
+		for(var i = 0; i < elementsToRemove.length; i++) {
+    		elementsToRemove[i].parentNode.removeChild(elementsToRemove[i]);
+		}
+
+  		//each element in the jsArray is split by "|"
+  		for (var i = 0; i < jsArray.length; i++) {
+			var jsArraySplit = [];
+        	jsArraySplit = jsArray[i].split("|");
+ 				
+  			//if the costumer input is the the same as "SolutionCostumerName"
+  			//create a new option "SolutionName" with the class "costumerOption" and the value "SolutionsID"
+  			if (jsArraySplit[0] == costumer) {
+  				var option = document.createElement("option");
+				option.text = jsArraySplit[1];
+  				option.className = "costumerOption";
+  				option.value =jsArraySplit[2];
+  				selectTag.add(option);
+  			}
+  			
+  		}
+  	}
+  
+    function validateTitle() {
+        var content = document.getElementById("title").value;
+        var wordNumber = content.split(" ");
+        var box = document.getElementById("markBoxTitle");
+
+        //if the word number is less than 3
+        if (wordNumber.length <= 2) {
+            //show error-sign
+            box.innerHTML = signRed;
+            //write error-message
+            document.getElementById("errorTitle").innerHTML = "Min. 3 words";
+            //field can not be validated
+            submitTitle = false;
+        }
+        else {
+            //show validation-OK sign
+            box.innerHTML = signGreen;
+            //clear error-message
+            document.getElementById("errorTitle").innerHTML = "";
+            //field validation is okay
+            submitTitle = true;
+        }
+    }  
+  
+    function validateCostumer() {
+        var content = document.getElementById("customer").value;
+        var option = document.getElementById("startOptionCostumer").value;
+        var box = document.getElementById("markBoxCostumer");
+
+        //if the default option is chosen
+        if (content === option) {
+            //show error-sign
+            box.innerHTML = signRed;
+            //write error-message
+            document.getElementById("errorCostumer").innerHTML = "Please select costumer";
+            //field can not be validated
+            submitCostumer = false;
+        }
+
+        else {
+            //show validation-OK sign
+            box.innerHTML = signGreen;
+            //clear error-message
+            document.getElementById("errorCostumer").innerHTML = "";
+            //field validation is okay
+            submitCostumer = true;
+        }
+    }
+
+    function validateSolutions() {
+        var content = document.getElementById("solutions").value;
+        var option = document.getElementById("startOptionSolutions").value;
+        var box = document.getElementById("markBoxSolutions");
+
+        //if the default option is chosen
+        if (content === option) {
+            //show error-sign
+            box.innerHTML = signRed;
+            //write error-message
+            document.getElementById("errorSolutions").innerHTML = "Please select solution";
+            //field can not be validated
+            submitSolutions = false;
+        }
+
+        else {
+            //show validation-OK sign
+            box.innerHTML = signGreen;
+            //clear error-message
+            document.getElementById("errorSolutions").innerHTML = "";
+            //field validation is okay
+            submitSolutions = true;
+        }
+    }
+
+    function validateWhy() {
+        var content = document.getElementById("textareaWhy").value;
+        var wordNumber = content.split(" ");
+        var box = document.getElementById("markBoxWhy");
+
+    	//if input is empty
+    	if(emptyString.test(content)){
+	  		//show error-sign
+	  		box.innerHTML= signRed;
+	  		//write error-message
+  	  		document.getElementById("errorWhy").innerHTML = "Please fill in costumer impact";
+  	  		//field can not be validated
+ 	  		submitWhy = false;
+    	}  
+    	else{
+	  		//show validation-OK sign
+	  		box.innerHTML= signGreen;
+	  		//clear error-message
+	  		document.getElementById("errorWhy").innerHTML = "";
+	  		//field validation is okay
+ 	  		submitWhy = true;
+    	} 
+    }
+
+    function validateURL() {
+        var content = document.getElementById("solutionUrl").value;
+        var box = document.getElementById("markBoxURL");
+
+  		//if the string contains white space
+  		if (whiteSpace.test(content)) {
+  			//show error-sign
+            box.innerHTML = signRed;
+            //write error-message
+            document.getElementById("errorURL").innerHTML = "Please insert a valid URL";
+            //field can not be validated
+            submitURL = false;
+  		}
+  
+  		else {	
+  			//if input is a valid URL
+        	if (RegExpURL.test(content)) {
+            	//show validation-OK sign
+            	box.innerHTML = signGreen;
+            	//clear error-message
+            	document.getElementById("errorURL").innerHTML = "";
+            	//field validation is okay
+            	submitURL = true;
+
+        	} else {
+            //show error-sign
+            box.innerHTML = signRed;
+            //write error-message
+            document.getElementById("errorURL").innerHTML = "Please insert a valid URL";
+            //field can not be validated
+            submitURL = false;
+        	}
+  		}
+    }
+
+    function validateDescription() {
+        var content = document.getElementById("description").value;
+        var wordNumber = content.split(" ");
+        var box = document.getElementById("markBoxDescription");
+
+        //if input is min. 6 words or a valid URL
+        if (wordNumber.length >= 6 || (RegExpURL.test(content))) {
+            //show validation-OK sign
+            box.innerHTML = signGreen;
+            //clear error-message
+            document.getElementById("errorDescription").innerHTML = "";
+            //field validation is okay
+            submitDescription = true;
+        }
+
+        else {
+            //show error-sign
+            box.innerHTML = signRed;
+            //write error-message
+            document.getElementById("errorDescription").innerHTML = "Min. 6 words or a valid URL";
+            //field can not be validated
+            submitDescription = false;
+        }
+    }
+  
+	function validateSteps() {
+        var content = document.getElementById("steps").value;
+  		var wordNumber = content.split(/[\s|\n]/); 
+        var box = document.getElementById("markBoxSteps");
+
+        //if input is min. 6 words or a valid URL
+        if (wordNumber.length >= 6) {
+            //show validation-OK sign
+            box.innerHTML = signGreen;
+            //clear error-message
+            document.getElementById("errorSteps").innerHTML = "";
+            //field validation is okay
+            submitSteps = true;
+        }
+
+        else {
+            //show error-sign
+            box.innerHTML = signRed;
+            //write error-message
+            document.getElementById("errorSteps").innerHTML = "Min. 6 words";
+            //field can not be validated
+            submitSteps = false;
+        }
+    }
+  
+  	function resetValidation() {
+
+		//remove validations signs and comments
+  		document.getElementById("markBoxTitle").innerHTML = "";
+  		document.getElementById("errorTitle").innerHTML = "";
+  		submitTitle = false;
+  
+  		document.getElementById("markBoxCostumer").innerHTML = "";
+  		document.getElementById("errorCostumer").innerHTML = "";
+  		submitCostumer = false;
+  
+  		document.getElementById("markBoxSolutions").innerHTML = "";
+  		document.getElementById("errorSolutions").innerHTML = "";
+  		submitSolutions = false;
+  
+		document.getElementById("markBoxWhy").innerHTML = "";
+  		document.getElementById("errorWhy").innerHTML = "";
+  		submitWhy = false;
+  
+  		document.getElementById("markBoxURL").innerHTML = "";
+  		document.getElementById("errorURL").innerHTML = "";
+  		submitURL = false;
+  
+  		document.getElementById("markBoxDescription").innerHTML = "";
+  		document.getElementById("errorDescription").innerHTML = "";
+  		submitDescription = false;
+  	
+  		document.getElementById("markBoxSteps").innerHTML = "";
+  		document.getElementById("errorSteps").innerHTML = "";
+  		submitSteps = false;
+  	}    
+
+    function validate() {
+
+        if (submitOK == false) {
+            errorComments();
+        }
+
+        if (submitOK == true) {
+            submit();
+          
+        }
+        return false;
+    }
+
+    function errorComments() {
+
+        //if each field has not been changed or can not be validated run the validation function
+		//else the field can be validated
+  		
+        if (submitTitle == false) {
+            validateTitle();
+        }  
+
+        if (submitCostumer == false) {
+            validateCostumer();
+        }
+  
+        if (submitSolutions == false) {
+            validateSolutions();
+        }
+
+        if (submitWhy == false) {
+            validateWhy();
+        }
+
+        if (submitURL == false) {
+            validateURL();
+        }
+
+        if (submitDescription == false) {
+            validateDescription();
+        }
+
+        if (submitSteps == false) {
+            validateSteps();
+        }
+
+		//if all fields can be validated
+        if (submitTitle == true && submitCostumer == true && submitSolutions == true && submitWhy == true && submitURL == true && submitDescription == true && submitSteps == true) {
+			//vis pop-up
+  			alert("Thank you for creating a case!")
+  
+            //OK to submit
+            submitOK = true;
+        }
+  
+  		else {
+  		return false;
+  		}
+    }
+  
+	function setValues() {
+  	
+    var list = document.getElementById("textareaWhy").value;
+  	var solution = document.getElementById("solution").value;	
+  	var values = list;
+  
+  
+
+  	if(document.getElementById("solution").value != ""){
+  		values = values + "\r\n" + "SOLUTION: " + "\r\n" + solution; 
+  	}
+  
+    document.getElementById("textareaWhy").value = values;
+
+}
+  
+</script>
+
