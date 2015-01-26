@@ -170,16 +170,12 @@
             }
         }
 
-			@foreach (var item3 in GetLoop("ItemPublisher:Items.List")){
-	
-				foreach (var eventItem in item3.GetLoop("ItemPublisher:Item.Events")){
-			
-					foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
-
-  						<div>
-		
-  							@{
-                          		//find the month and day for each course
+        @foreach (var item3 in GetLoop("ItemPublisher:Items.List")){
+            foreach (var eventItem in item3.GetLoop("ItemPublisher:Item.Events")){
+                foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
+                    <div>
+		        @{
+                            //find the month and day for each course
   								int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
   								int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
   							}
