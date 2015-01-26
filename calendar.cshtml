@@ -1,0 +1,868 @@
+<link rel="stylesheet" href="/Files/Templates/ItemPublisher/ItemPublisher.css" />
+<link rel="stylesheet" type="text/css" href="/Files/Templates/Designs/espresso/scss/custom/engage_styles.css">
+
+<style>
+  body{
+    color:#474747; 
+  }
+  td, tr{  
+  	border-style:solid;
+	border-color:black;
+	border-width:1px;
+	border-left:0px;
+    border-right:0px;
+  	text-align: right;  
+  	height: 2em;
+  	width: 16%;
+  }
+  
+  th{
+  	border-style:solid;
+    border-bottom-width:3px;
+    border-left:0px;
+    border-right:0px;
+    color:#474747;
+    text-transform:uppercase;    
+  }
+  
+  table{
+    border-left:0px;
+    border-right-width:0px;   
+    border-right-style:hidden;
+    border-left-style:hidden;
+    border-top-style:hidden;
+    color:#474747;
+    text-align:center;
+  
+  	margin-bottom: 2em;
+    
+  }
+  td:nth-child(1) {
+    
+    padding:8px;
+  }
+  td:first-child, tr:first-child th:first-child{
+    text-align:left; 
+    padding:8px;
+  	width: 36%;
+  }
+  
+  td:nth-child(2), tr:nth-child(2) th:nth-child(2) {
+  	text-align: right;
+  	padding-right: 8px;
+  	width: 13%;
+  }
+  
+  td:nth-child(3), tr:nth-child(3) th:nth-child(3) {
+  	text-align: left;
+  	width: 19%;
+  }
+
+  .noborder tr td:first-child{
+    border-top-style:hidden; 
+    
+  }
+    
+  .course {
+    margin-left: 0px;
+  }
+  
+    
+  	#popup {
+  		background-color: #0085CA;	
+    	z-index: 1050;
+    	padding-left: 20px solid rgba(255, 0, 0, .5);    	
+  	}
+ 	.header {
+    	color: #fefdf9;
+    	margin-bottom: 30px;
+ 	 }
+ 
+  	.close_popup {
+    	z-index: 1050;
+    	display: block;    
+    	font-size: 1.25em;
+    	line-height: 1.45em;    
+    	background-color: #0085CA;
+    	position: absolute;   
+    	text-align: center;    
+    	width: 30px;
+    	height: 30px;    
+    	top: -15px;
+    	left: -15px;    
+    	border: 2px solid #f1f1f1; 
+    	border-radius: 50%; 
+  
+  	}
+  	
+  	a.close_popup:hover {    
+    	background-color: #0D92D7;
+  	}
+  
+  	.modal-header{
+    	border: 0px;
+    	padding: 0px;
+  	}
+  	
+  	.modal-body {
+    padding-bottom: 28px;
+  	}
+  
+ 	h2 {
+    	margin-top: 18px;
+  	}
+  
+  	i {
+    	color: #f1f1f1;
+  	}
+
+</style>
+
+
+<div class="row">
+    
+	@{
+  		//find the date of today
+  		DateTime now = DateTime.Now;
+  		//find the day of day of today
+  		int thisDay = now.Day;
+  		//find the month of today and use modulus operator because there is only twelve month
+  		int thisMonth = (now.Month) %12;
+  		//find the next five months
+  		int nextMonth = (thisMonth + 1) %12;
+  		int nextMonth2 = (thisMonth +2) %12;
+  		int nextMonth3 = (thisMonth +3) %12;
+  		int nextMonth4 = (thisMonth +4) %12;
+  		int nextMonth5 = (thisMonth +5) %12;
+  
+		//booleans used two find out whether the month should be displayed
+		bool showThisMonth = false;
+  		bool showNextMonth = false;
+  		bool showNextMonth2 = false;
+  		bool showNextMonth3 = false;
+  		bool showNextMonth4 = false;
+  		bool showNextMonth5 = false;
+  
+		//create a list for each month  
+  		var thisMonthList = new List<dynamic>();
+  		var nextMonthList = new List<dynamic>();
+  		var nextMonth2List = new List<dynamic>();
+  		var nextMonth3List = new List<dynamic>();
+  		var nextMonth4List = new List<dynamic>();
+  		var nextMonth5List = new List<dynamic>();
+  	}  
+
+  	<div class="span12 columnWrapper">
+			@foreach (var item in GetLoop("ItemPublisher:Items.List")){
+	
+				foreach (var eventItem in item.GetLoop("ItemPublisher:Item.Events")){
+			
+					foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
+
+  						<div>
+		
+  							@{
+                          		//find the month and day for each course
+  								int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
+                          		int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
+  							}
+               			</div>
+						//if the month of the course is the same as this as thisMonth
+            	 		if (thisMonth == courseMonth) {
+      						//if we have not passed the day
+                        	if (thisDay <= courseDay) {
+         
+	                    		<div>
+                              		@{
+      									//there is courses held this month, so the month should be shown
+      									showThisMonth = true;  
+      
+      									//Add to the list of the month                        
+                              			thisMonthList.Add(new {
+                              				Name = item.GetValue("ItemPublisher:Item.Name.Value"),
+                              				Date = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("MMM dd"),
+                              				Location = eventItem.GetValue("ItemPublisher:Item.Events.Location.Value"),
+                              				Price = eventItem.GetValue("ItemPublisher:Item.Events.Price.Value"),
+                              				Day = courseDay,
+      										SignupDate = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("dd/MM/yyyy"),
+      										Url = item.GetString("ItemPublisher:Item.Url"),
+      										Status = eventItem.GetValue("ItemPublisher:Item.Events.Closed.Value")
+                              			});    
+
+                              		}
+                      			</div> 
+        					}
+            			}
+  					}		
+  				}
+        	}
+                     
+          
+			@foreach (var item2 in GetLoop("ItemPublisher:Items.List")){
+	
+				foreach (var eventItem in item2.GetLoop("ItemPublisher:Item.Events")){
+			
+					foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
+  						<div>
+		
+  							@{
+                          		//find the month and day for each course
+  								int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
+                          		int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
+  							}
+               			</div>
+
+						//if the month of the course is the same as this as nextMonth
+            	 		if (nextMonth == courseMonth) {
+                      		<div>
+                              @{
+                              	//there is courses held this month, so the month should be shown
+								showNextMonth = true;
+                              
+                              	//Add to the list of the month 
+                              	nextMonthList.Add(new {
+                              		Name = item2.GetValue("ItemPublisher:Item.Name.Value"),
+                              		Date = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("MMM dd"),
+                              		Location = eventItem.GetValue("ItemPublisher:Item.Events.Location.Value"),
+                              		Price = eventItem.GetValue("ItemPublisher:Item.Events.Price.Value"),
+                              		Day = courseDay,
+                              		SignupDate = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("dd/MM/yyyy"),
+                              		Url = item2.GetString("ItemPublisher:Item.Url"),
+      								Status = eventItem.GetValue("ItemPublisher:Item.Events.Closed.Value")
+                              	});
+                              }
+                      		</div>
+            			}
+
+  					}
+		
+  				}
+
+        	}
+
+			@foreach (var item3 in GetLoop("ItemPublisher:Items.List")){
+	
+				foreach (var eventItem in item3.GetLoop("ItemPublisher:Item.Events")){
+			
+					foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
+
+  						<div>
+		
+  							@{
+                          		//find the month and day for each course
+  								int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
+  								int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
+  							}
+
+          				</div>
+  
+      					//if the month of the course is the same as this as nextMonth2
+           				if (nextMonth2 == courseMonth) {
+							<div>
+                              @{
+                              	//there is courses held this month, so the month should be shown
+								showNextMonth2 = true;
+  
+                              	//Add to the list of the month 
+  								nextMonth2List.Add(new {
+                              		Name = item3.GetValue("ItemPublisher:Item.Name.Value"),
+                              		Date = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("MMM dd"),
+                              		Location = eventItem.GetValue("ItemPublisher:Item.Events.Location.Value"),
+                              		Price = eventItem.GetValue("ItemPublisher:Item.Events.Price.Value"),
+                              		Day = courseDay,
+                              		SignupDate = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("dd/MM/yyyy"),
+                              		Url = item3.GetString("ItemPublisher:Item.Url"),
+      								Status = eventItem.GetValue("ItemPublisher:Item.Events.Closed.Value")
+                              	});
+                              }
+                      		</div> 
+
+            	 		}
+
+  					}
+		
+  				}
+
+       		 }
+  
+  
+			@foreach (var item4 in GetLoop("ItemPublisher:Items.List")){
+	
+				foreach (var eventItem in item4.GetLoop("ItemPublisher:Item.Events")){
+			
+					foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
+
+  						<div>
+		
+  							@{
+                          		//find the month and day for each course
+  								int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
+  								int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
+  							}
+                          		
+          				</div>
+
+  						//if the month of the course is the same as this as nextMonth3
+           				if (nextMonth3 == courseMonth) {
+							<div>
+                              @{
+                              	//there is courses held this month, so the month should be shown
+								showNextMonth3 = true;
+  
+                              	//Add to the list of the month 
+  								nextMonth3List.Add(new {
+                              		Name = item4.GetValue("ItemPublisher:Item.Name.Value"),
+                              		Date = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("MMM dd"),
+                              		Location = eventItem.GetValue("ItemPublisher:Item.Events.Location.Value"),
+                              		Price = eventItem.GetValue("ItemPublisher:Item.Events.Price.Value"),
+                              		Day = courseDay,
+                              		SignupDate = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("dd/MM/yyyy"),
+                              		Url = item4.GetString("ItemPublisher:Item.Url"),
+      								Status = eventItem.GetValue("ItemPublisher:Item.Events.Closed.Value")
+                              	});
+                              }
+                      		</div>
+
+            	 		}
+
+  					}
+		
+  				}
+
+       		 }                     
+
+  
+			@foreach (var item5 in GetLoop("ItemPublisher:Items.List")){
+	
+				foreach (var eventItem in item5.GetLoop("ItemPublisher:Item.Events")){
+			
+					foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
+
+  						<div>
+		
+  							@{
+                          		//find the month and day for each course
+  								int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
+  								int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
+  							}
+                		
+          				</div>
+  
+      					//if the month of the course is the same as this as nextMonth4
+           				if (nextMonth4 == courseMonth) {
+							<div>
+                              @{
+                              	//there is courses held this month, so the month should be shown
+								showNextMonth4 = true;
+  
+                              	//Add to the list of the month 
+  								nextMonth4List.Add(new {
+                              		Name = item5.GetValue("ItemPublisher:Item.Name.Value"),
+                              		Date = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("MMM dd"),
+                              		Location = eventItem.GetValue("ItemPublisher:Item.Events.Location.Value"),
+                              		Price = eventItem.GetValue("ItemPublisher:Item.Events.Price.Value"),
+                              		Day = courseDay,
+                              		SignupDate = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("dd/MM/yyyy"),
+                              		Url = item5.GetString("ItemPublisher:Item.Url"),
+      								Status = eventItem.GetValue("ItemPublisher:Item.Events.Closed.Value")
+                              	});
+                              }
+                      		</div>
+
+            	 		}
+
+  					}
+		
+  				}
+
+       		 }
+                     
+  
+			@foreach (var item6 in GetLoop("ItemPublisher:Items.List")){
+	
+				foreach (var eventItem in item6.GetLoop("ItemPublisher:Item.Events")){
+			
+					foreach (var eventGroup in eventItem.GetLoop("ItemPublisher:Item.Events.Groups")){
+
+  						<div>
+		
+  							@{
+                          		//find the month and day for each course
+  								int courseMonth = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Month) %12;
+  								int courseDay = (eventItem.GetDate("ItemPublisher:Item.Events.Date").Day);
+  							}
+                		
+          				</div>
+  
+      					//if the month of the course is the same as this as nextMonth5
+           				if (nextMonth5 == courseMonth) {
+							<div>
+                              @{
+                              	//there is courses held this month, so the month should be shown
+								showNextMonth5 = true;
+  
+                              	//Add to the list of the month 
+  								nextMonth5List.Add(new {
+                              		Name = item6.GetValue("ItemPublisher:Item.Name.Value"),
+                              		Date = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("MMM dd"),
+                              		Location = eventItem.GetValue("ItemPublisher:Item.Events.Location.Value"),
+                              		Price = eventItem.GetValue("ItemPublisher:Item.Events.Price.Value"),
+                              		Day = courseDay,
+                              		SignupDate = eventItem.GetDate("ItemPublisher:Item.Events.Date.Value").ToString("dd/MM/yyyy"),
+                              		Url = item6.GetString("ItemPublisher:Item.Url"),
+      								Status = eventItem.GetValue("ItemPublisher:Item.Events.Closed.Value")
+                              	});
+                              }
+                      		</div>
+
+            	 		}
+
+  					}
+		
+  				}
+
+       		 }
+                             
+                          
+		@if (showThisMonth == true) {
+            <table class="course span12">
+              	<!--show the name of the current month-->
+                <th colspan="10">@now.ToString("MMMM")</th>
+             
+                @{
+              		//sort list after day in month
+                    thisMonthList.Sort((x, y) => x.Day.CompareTo(y.Day));
+                }
+                     
+                @foreach (dynamic course in thisMonthList) {
+                    <tr> 
+                        <td><a href ="@course.Url" >@course.Name</a></td>    
+                        <td>@course.Date,</td>
+                      	<td>@course.Location</td>
+                        <td>@course.Price</td> 
+      					@if (course.Status == false) {
+                        	<td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
+      					}
+      					else {
+      						<td>Closed</td>
+      					}     
+                    </tr>
+                }                              
+            </table>
+      	}
+  
+		@if (showNextMonth == true) {
+            <table class="course span12">
+              	<!--show the name of nextMonth-->
+                @if (nextMonth == 1) {
+          			<th colspan="10">@Translate("January","January")</th>
+          		}
+          
+          		@if (nextMonth == 2) {
+          			<th colspan="10">@Translate("February","February")</th>
+          		}
+          
+                @if (nextMonth == 3) {
+                	<th colspan="10">@Translate("March","March")</th>
+                }
+                                
+                @if (nextMonth == 4) {
+                	<th colspan="10">@Translate("April","April")</th>
+                }
+                              
+                @if (nextMonth == 5) {
+                	<th colspan="10">@Translate("May","May")</th>
+                }
+                              
+                @if (nextMonth == 6) {
+                	<th colspan="10">@Translate("June","June")</th>
+                }
+                              
+                @if (nextMonth == 7) {
+                	<th colspan="10">@Translate("July","July")</th>
+                }
+                              
+                @if (nextMonth == 8) {
+                	<th colspan="10">@Translate("August","August")</th>
+                }
+                              
+                @if (nextMonth == 9) {
+                	<th colspan="10">@Translate("September","September")</th>
+                }
+                              
+                @if (nextMonth == 10) {
+                	<th colspan="10">@Translate("October","October")</th>
+                }
+                              
+                @if (nextMonth == 11) {
+                	<th colspan="10">@Translate("November","November")</th>
+                }
+                              
+                @if (nextMonth == 0) {
+                	<th colspan="10">@Translate("December","December")</th>
+                }
+             
+                @{
+              		//sort list after day in month
+                    nextMonthList.Sort((x, y) => x.Day.CompareTo(y.Day));
+                }
+                                        
+                @foreach (dynamic course in nextMonthList) {
+                    <tr> 
+                      	<td><a href ="@course.Url" >@course.Name</a></td>  
+                        <td>@course.Date,</td>
+                      	<td>@course.Location</td> 
+                        <td>@course.Price</td>
+      					@if (course.Status == false) {
+                        	<td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
+      					}
+      					else {
+      						<td>Closed</td>
+      					}
+                    </tr>
+                }                              
+            </table>
+      	}
+  
+		@if (showNextMonth2 == true) {
+            <table class="course span12">
+              	<!--show the name of nextMonth2-->
+                @if (nextMonth2 == 1) {
+          			<th colspan="10">January</th>
+          		}
+          
+          		@if (nextMonth2 == 2) {
+          			<th colspan="10">February</th>
+          		}
+          
+                @if (nextMonth2 == 3) {
+                	<th colspan="10">March</th>
+                }
+                                
+                @if (nextMonth2 == 4) {
+                	<th colspan="10">April</th>
+                }
+                              
+                @if (nextMonth2 == 5) {
+                	<th colspan="10">May</th>
+                }
+                              
+                @if (nextMonth2 == 6) {
+                	<th colspan="10">June</th>
+                }
+                              
+                @if (nextMonth2 == 7) {
+                	<th colspan="10">July</th>
+                }
+                              
+                @if (nextMonth2 == 8) {
+                	<th colspan="10">August</th>
+                }
+                              
+                @if (nextMonth2 == 9) {
+                	<th colspan="10">September</th>
+                }
+                              
+                @if (nextMonth2 == 10) {
+                	<th colspan="10">October</th>
+                }
+                              
+                @if (nextMonth2 == 11) {
+                	<th colspan="10">November</th>
+                }
+                              
+                @if (nextMonth2 == 0) {
+                	<th colspan="10">December</th>
+                }
+             
+                @{
+              		//sort list after day in month
+                    nextMonth2List.Sort((x, y) => x.Day.CompareTo(y.Day));
+                }
+                                        
+                @foreach (dynamic course in nextMonth2List) {
+                    <tr> 
+                        <td><a href = "@course.Url" >@course.Name</a></td>    
+                        <td>@course.Date,</td>
+                      	<td>@course.Location</td> 
+                        <td>@course.Price</td> 
+      					@if (course.Status == false) {
+                        	<td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
+      					}
+      					else {
+      						<td>Closed</td>
+      					}   
+                    </tr>
+                }                              
+            </table>
+      	}
+  
+		@if (showNextMonth3 == true) {
+            <table class="course span12">
+              	<!--show the name of nextMonth3-->
+                @if (nextMonth3 == 1) {
+          			<th colspan="10">January</th>
+          		}
+          
+          		@if (nextMonth3 == 2) {
+          			<th colspan="10">February</th>
+          		}
+          
+                @if (nextMonth3 == 3) {
+                	<th colspan="10">March</th>
+                }
+                                
+                @if (nextMonth3 == 4) {
+                	<th colspan="10">April</th>
+                }
+                              
+                @if (nextMonth3 == 5) {
+                	<th colspan="10">May</th>
+                }
+                              
+                @if (nextMonth3 == 6) {
+                	<th colspan="10">June</th>
+                }
+                              
+                @if (nextMonth3 == 7) {
+                	<th colspan="10">July</th>
+                }
+                              
+                @if (nextMonth3 == 8) {
+                	<th colspan="10">August</th>
+                }
+                              
+                @if (nextMonth3 == 9) {
+                	<th colspan="10">September</th>
+                }
+                              
+                @if (nextMonth3 == 10) {
+                	<th colspan="10">October</th>
+                }
+                              
+                @if (nextMonth3 == 11) {
+                	<th colspan="10">November</th>
+                }
+                              
+                @if (nextMonth3 == 0) {
+                	<th colspan="10">December</th>
+                }
+             
+                @{
+              		//sort list after day in month
+                    nextMonth3List.Sort((x, y) => x.Day.CompareTo(y.Day));
+                }
+                                        
+                @foreach (dynamic course in nextMonth3List) {
+                    <tr> 
+                        <td><a href ="@course.Url" >@course.Name</a></td>    
+                        <td> @course.Date,</td>
+                      	<td> @course.Location</td> 
+                        <td>@course.Price</td> 
+      					@if (course.Status == false) {
+                        	<td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
+      					}
+      					else {
+      						<td>Closed</td>
+      					}     
+                    </tr>
+                }                              
+            </table>
+      	}
+  
+		@if (showNextMonth4 == true) {
+            <table class="course span12">
+              	<!--show the name of nextMonth4-->
+                @if (nextMonth4 == 1) {
+          			<th colspan="10">January</th>
+          		}
+          
+          		@if (nextMonth4 == 2) {
+          			<th colspan="10">February</th>
+          		}
+          
+                @if (nextMonth4 == 3) {
+                	<th colspan="10">March</th>
+                }
+                                
+                @if (nextMonth4 == 4) {
+                	<th colspan="10">April</th>
+                }
+                              
+                @if (nextMonth4 == 5) {
+                	<th colspan="10">May</th>
+                }
+                              
+                @if (nextMonth4 == 6) {
+                	<th colspan="10">June</th>
+                }
+                              
+                @if (nextMonth4 == 7) {
+                	<th colspan="10">July</th>
+                }
+                              
+                @if (nextMonth4 == 8) {
+                	<th colspan="10">August</th>
+                }
+                              
+                @if (nextMonth4 == 9) {
+                	<th colspan="10">September</th>
+                }
+                              
+                @if (nextMonth4 == 10) {
+                	<th colspan="10">October</th>
+                }
+                              
+                @if (nextMonth4 == 11) {
+                	<th colspan="10">November</th>
+                }
+                              
+                @if (nextMonth4 == 0) {
+                	<th colspan="10">December</th>
+                }
+             
+                @{
+              		//sort list after day in month
+                    nextMonth4List.Sort((x, y) => x.Day.CompareTo(y.Day));
+                }
+                                        
+                @foreach (dynamic course in nextMonth4List) {
+                    <tr> 
+                        <td><a href ="@course.Url" >@course.Name</a></td>    
+                        <td>@course.Date,</td>
+                      	<td>@course.Location</td>
+                        <td>@course.Price</td> 
+      					@if (course.Status == false) {
+                        	<td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
+      					}
+      					else {
+      						<td>Closed</td>
+      					}      
+                    </tr>
+                }                              
+            </table>
+      	}
+  
+		@if (showNextMonth5 == true) {
+            <table class="course span12">
+              	<!--show the name of nextMonth5-->
+                @if (nextMonth5 == 1) {
+          			<th colspan="10">January</th>
+          		}
+          
+          		@if (nextMonth5 == 2) {
+          			<th colspan="10">February</th>
+          		}
+          
+                @if (nextMonth5 == 3) {
+                	<th colspan="10">March</th>
+                }
+                                
+                @if (nextMonth5 == 4) {
+                	<th colspan="10">April</th>
+                }
+                              
+                @if (nextMonth5 == 5) {
+                	<th colspan="10">May</th>
+                }
+                              
+                @if (nextMonth5 == 6) {
+                	<th colspan="10">June</th>
+                }
+                              
+                @if (nextMonth5 == 7) {
+                	<th colspan="10">July</th>
+                }
+                              
+                @if (nextMonth5 == 8) {
+                	<th colspan="10">August</th>
+                }
+                              
+                @if (nextMonth5 == 9) {
+                	<th colspan="10">September</th>
+                }
+                              
+                @if (nextMonth5 == 10) {
+                	<th colspan="10">October</th>
+                }
+                              
+                @if (nextMonth5 == 11) {
+                	<th colspan="10">November</th>
+                }
+                              
+                @if (nextMonth5 == 0) {
+                	<th colspan="10">December</th>
+                }
+             
+                @{
+              		//sort list after day in month
+                    nextMonth5List.Sort((x, y) => x.Day.CompareTo(y.Day));
+                }
+                                        
+                @foreach (dynamic course in nextMonth5List) {
+                    <tr> 
+                        <td><a href = "@course.Url" >@course.Name</a></td>    
+                        <td> @course.Date,</td>
+                      	<td>@course.Location</td>
+                        <td>@course.Price</td> 
+      					@if (course.Status == false) {
+                        	<td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
+      					}
+      					else {
+      						<td>Closed</td>
+      					}
+                    </tr>
+                }                              
+            </table>
+      	}   
+     
+	</div>                     
+</div>
+
+
+<!-- Modal -->
+<div id="popup" class="modal hide fade">
+	<div class="modal-header">
+    	<a class="close_popup" data-dismiss="modal"><i class="icon icon-remove"></i></a>
+  	</div>
+
+  	<div class="modal-body">
+    
+		<h2 class="header">Signup</h2>
+      
+      <form method="post" id="FormSave1" name="FormSave1" enctype="multipart/form-data" action="/Admin/Public/404.aspx" onsubmit="s=function(e){e.elements['FormCH1_h'].value='ac962a5b7e8d75b83e6b63f14b542655';e.elements['_sys_to_email'].value='';e.setAttribute('action', 'http://engage.dynamicweb.com/Default.aspx?ID=6495');return true};return s(this)">  
+	  <input type="hidden" name="ID" value="6495" /><input type="hidden" name="FormPID" value="22711" /><input type="hidden" name="FormID" value="1" /><input type="hidden" name="SubmitForm" value="true" /><input type="hidden" name="_sys_to_email" value="bot@dynamicweb.com" />
+      <input type="hidden" name="FormCH1_h" value="ac962a5b7e8d75b83e6b63f14b542655" />
+      <input type="hidden" name="FormCH1_f" value="6c249e775af617353fb1c963e2859346" />
+      <input type="hidden" name="FormCH1_s" value="94dcf0e180702e9672cb08af7f70d36b" />
+      <input type="hidden" name="FormCH1_i" value="6d52419b47fa62b1bd029e699b5316ec" />
+
+			<!--input fields-->
+			<input class = "input-block-level" type ="text" name='engageSignUp_Name' id ='engageSignUp_Name' value = "" placeholder="Name"/>
+			<input class = "input-block-level" type ="text" name ='engageSignUp_Email' id ='engageSignUp_Email' value = "" placeholder="Email"/>
+    		<input class = "input-block-level" type ="text" name='engageSignUp_Course' id ='engageSignUp_Course' value=""/>
+    		<input class = "input-block-level" type ="text" name='engageSignUp_Date' id ='engageSignUp_Date' value=""/> 
+    		<textarea class = "input-block-level" type ="text" name = 'engageSignUp_Reference' id ='engageSignUp_Reference' placeholder="Reference"></textarea>  
+			<p style="color:white">@Translate("course_terms_text") <a target="_blank" href="
+			Default.aspx/Default.aspx?ID=9199
+              ">@Translate("course_terms_link")</a></p>
+
+			<button class ="btn btn-primary" type = "submit">Submit</button>
+
+		<!--FormEnd-->
+		</form>
+
+	</div>
+</div> 
+
+<script>
+
+function passVariables(course, date, location) {
+  var dateLocation = date + " in " + location;
+  document.getElementById("engageSignUp_Course").value = course;
+  document.getElementById("engageSignUp_Date").value = dateLocation;
+  document.getElementById("engageSignUp_Location").value = location;
+  }  
+  
+</script>
+
