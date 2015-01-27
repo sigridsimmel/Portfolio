@@ -232,7 +232,6 @@ button[type="reset"] {
             //field can not be validated
             submitCostumer = false;
         }
-
         else {
             //show validation-OK sign
             box.innerHTML = signGreen;
@@ -257,7 +256,6 @@ button[type="reset"] {
             //field can not be validated
             submitSolutions = false;
         }
-
         else {
             //show validation-OK sign
             box.innerHTML = signGreen;
@@ -275,20 +273,20 @@ button[type="reset"] {
 
     	//if input is empty
     	if(emptyString.test(content)){
-	  		//show error-sign
-	  		box.innerHTML= signRed;
-	  		//write error-message
-  	  		document.getElementById("errorWhy").innerHTML = "Please fill in costumer impact";
-  	  		//field can not be validated
- 	  		submitWhy = false;
+	    //show error-sign
+	    box.innerHTML= signRed;
+	    //write error-message
+  	    document.getElementById("errorWhy").innerHTML = "Please fill in costumer impact";
+  	    //field can not be validated
+ 	    submitWhy = false;
     	}  
     	else{
-	  		//show validation-OK sign
-	  		box.innerHTML= signGreen;
-	  		//clear error-message
-	  		document.getElementById("errorWhy").innerHTML = "";
-	  		//field validation is okay
- 	  		submitWhy = true;
+	    //show validation-OK sign
+	    box.innerHTML= signGreen;
+	    //clear error-message
+	    document.getElementById("errorWhy").innerHTML = "";
+	    //field validation is okay
+ 	    submitWhy = true;
     	} 
     }
 
@@ -296,35 +294,34 @@ button[type="reset"] {
         var content = document.getElementById("solutionUrl").value;
         var box = document.getElementById("markBoxURL");
 
-  		//if the string contains white space
-  		if (whiteSpace.test(content)) {
-  			//show error-sign
+  	//if the string contains white space
+  	if (whiteSpace.test(content)) {
+  	    //show error-sign
             box.innerHTML = signRed;
             //write error-message
             document.getElementById("errorURL").innerHTML = "Please insert a valid URL";
             //field can not be validated
             submitURL = false;
-  		}
-  
-  		else {	
-  			//if input is a valid URL
-        	if (RegExpURL.test(content)) {
-            	//show validation-OK sign
-            	box.innerHTML = signGreen;
-            	//clear error-message
-            	document.getElementById("errorURL").innerHTML = "";
-            	//field validation is okay
-            	submitURL = true;
-
-        	} else {
-            //show error-sign
-            box.innerHTML = signRed;
-            //write error-message
-            document.getElementById("errorURL").innerHTML = "Please insert a valid URL";
-            //field can not be validated
-            submitURL = false;
-        	}
-  		}
+  	}
+  	else {	
+  	    //if input is a valid URL
+            if (RegExpURL.test(content)) {
+                //show validation-OK sign
+                box.innerHTML = signGreen;
+                //clear error-message
+                document.getElementById("errorURL").innerHTML = "";
+                //field validation is okay
+                submitURL = true;
+            } 
+            else {
+                //show error-sign
+                box.innerHTML = signRed;
+                //write error-message
+                document.getElementById("errorURL").innerHTML = "Please insert a valid URL";
+                //field can not be validated
+                submitURL = false;
+            }
+  	}
     }
 
     function validateDescription() {
