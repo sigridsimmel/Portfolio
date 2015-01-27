@@ -127,7 +127,7 @@ button[type="reset"] {
         </div>
         <div class="control-group">
             <div class="controls">
-                <button type="submit" name="cmd" value="saveCase" class="btn btn-primary" onclick="setValues()">Submit</button>
+                <button type="submit" name="cmd" value="saveCase" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn" onclick="resetValidation()">Reset</button>
             </div>
         </div>
@@ -449,22 +449,6 @@ button[type="reset"] {
   	    return false;
   	}
     }
-  
-	function setValues() {
-  	
-    var list = document.getElementById("textareaWhy").value;
-  	var solution = document.getElementById("solution").value;	
-  	var values = list;
-  
-  
-
-  	if(document.getElementById("solution").value != ""){
-  		values = values + "\r\n" + "SOLUTION: " + "\r\n" + solution; 
-  	}
-  
-    document.getElementById("textareaWhy").value = values;
-
-}
   
 </script>
 
