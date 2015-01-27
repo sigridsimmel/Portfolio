@@ -92,50 +92,48 @@ button[type="reset"] {
             </div>
         </div>
 
-            <div class="control-group">
-                <label id="URLtekst" class="control-label" for="solutionUrl">URL</label>
-                <div class="controls">
-                    <input id="solutionUrl" name="solutionUrl" class="span6" type="text" onchange="validateURL()" placeholder="URL to page with problems" />
-                    <div id="markBoxURL" class="help-inline"></div>
-                    <span id="errorURL" class="help-inline"></span>
-                </div>
+        <div class="control-group">
+            <label id="URLtekst" class="control-label" for="solutionUrl">URL</label>
+            <div class="controls">
+                <input id="solutionUrl" name="solutionUrl" class="span6" type="text" onchange="validateURL()" placeholder="URL to page with problems" />
+                <div id="markBoxURL" class="help-inline"></div>
+                <span id="errorURL" class="help-inline"></span>
             </div>
+        </div>
 
+        <div class="control-group">
+            <label class="control-label" for="description">Description</label>
+            <div class="controls">
+                <textarea id="description" name="description" class="span6" cols="50" onchange="validateDescription()" rows="6"></textarea>
+                <div id="markBoxDescription" class="help-inline"></div>
+                <span id="errorDescription" class="help-inline"></span>
+            </div>
+        </div>
 
-            <div class="control-group">
-                <label class="control-label" for="description">Description</label>
-                <div class="controls">
-                    <textarea id="description" name="description" class="span6" cols="50" onchange="validateDescription()" rows="6"></textarea>
-                    <div id="markBoxDescription" class="help-inline"></div>
-                    <span id="errorDescription" class="help-inline"></span>
-                </div>
+        <div class="control-group">
+            <label class="control-label" for="textareaSteps">Steps</label>
+            <div class="controls">
+                <textarea id="steps" name="steps" class="span6" cols="50" onchange="validateSteps()" placeholder="Please write steps to reproduce the problem" rows="6"></textarea>
+                <div id="markBoxSteps" class="help-inline"></div>
+                <span id="errorSteps" class="help-inline"></span>
             </div>
+        </div>
 
-            <div class="control-group">
-                <label class="control-label" for="textareaSteps">Steps</label>
-                <div class="controls">
-                    <textarea id="steps" name="steps" class="span6" cols="50" onchange="validateSteps()" placeholder="Please write steps to reproduce the problem" rows="6"></textarea>
-                    <div id="markBoxSteps" class="help-inline"></div>
-                    <span id="errorSteps" class="help-inline"></span>
-                </div>
+        <div class="control-group">
+            <label class="control-label" for="attachments">Attachments</label>
+            <div class="controls">
+                <input id="attachments" name="attachments" class="span6" type="file" />
             </div>
-
-            <div class="control-group">
-                <label class="control-label" for="attachments">Attachments</label>
-                <div class="controls">
-                    <input id="attachments" name="attachments" class="span6" type="file" />
-                </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" name="cmd" value="saveCase" class="btn btn-primary" onclick="setValues()">Submit</button>
+                <button type="reset" class="btn" onclick="resetValidation()">Reset</button>
             </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" name="cmd" value="saveCase" class="btn btn-primary" onclick="setValues()">Submit</button>
-                    <button type="reset" class="btn" onclick="resetValidation()">Reset</button>
-                </div>
-            </div>
+        </div>
   
-
-        </form>
-    </div>
+    </form>
+</div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
