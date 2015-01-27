@@ -150,7 +150,7 @@ button[type="reset"] {
     //booleans to check if fields have been changed
     submitCostumer = false;
     submitSolutions = false;
-  	submitWhy = false;
+    submitWhy = false;
     submitTitle = false;
     submitURL = false;
     submitDescription = false;
@@ -158,46 +158,41 @@ button[type="reset"] {
   
     //boolean useed in the function "validation" to check if it is OK to submit
     submitOK = false;
-  
   	
     function solutionOptions(input) {
-  		//convert C# array to JavaScript array
-  		var jsArray = @Raw(Json.Encode(@solutionsArray));
+        //convert C# array to JavaScript array
+  	var jsArray = @Raw(Json.Encode(@solutionsArray));
   
-  		var costumer = input.value;
-  		var selectTag = document.getElementById("solutions"); 		
-  		var classCostumerOption = document.getElementsByClassName("costumerOption");
+  	var costumer = input.value;
+  	var selectTag = document.getElementById("solutions"); 		
+  	var classCostumerOption = document.getElementsByClassName("costumerOption");
   
-  		//create new array
-		var elementsToRemove = [];
+  	//create new array
+	var elementsToRemove = [];
   
         //place existing options in new array
-		for (var i = 0; i < classCostumerOption.length; i++) {
-        	elementsToRemove.push(classCostumerOption[i]);
-    	}
-  
-		//remove existing options
-		for(var i = 0; i < elementsToRemove.length; i++) {
-    		elementsToRemove[i].parentNode.removeChild(elementsToRemove[i]);
-		}
-
-  		//each element in the jsArray is split by "|"
-  		for (var i = 0; i < jsArray.length; i++) {
-			var jsArraySplit = [];
-        	jsArraySplit = jsArray[i].split("|");
- 				
-  			//if the costumer input is the the same as "SolutionCostumerName"
-  			//create a new option "SolutionName" with the class "costumerOption" and the value "SolutionsID"
-  			if (jsArraySplit[0] == costumer) {
-  				var option = document.createElement("option");
-				option.text = jsArraySplit[1];
-  				option.className = "costumerOption";
-  				option.value =jsArraySplit[2];
-  				selectTag.add(option);
-  			}
-  			
-  		}
-  	}
+	for (var i = 0; i < classCostumerOption.length; i++) {
+            elementsToRemove.push(classCostumerOption[i]);
+        }
+	//remove existing options
+	for(var i = 0; i < elementsToRemove.length; i++) {
+    	    elementsToRemove[i].parentNode.removeChild(elementsToRemove[i]);
+	}
+  	//each element in the jsArray is split by "|"
+  	for (var i = 0; i < jsArray.length; i++) {
+	    var jsArraySplit = [];
+            jsArraySplit = jsArray[i].split("|");
+  	    //if the costumer input is the the same as "SolutionCostumerName"
+  	    //create a new option "SolutionName" with the class "costumerOption" and the value "SolutionsID"
+  	    if (jsArraySplit[0] == costumer) {
+  	        var option = document.createElement("option");
+		option.text = jsArraySplit[1];
+  		option.className = "costumerOption";
+  		option.value =jsArraySplit[2];
+  		selectTag.add(option);
+  	    }
+        }
+    }
   
     function validateTitle() {
         var content = document.getElementById("title").value;
