@@ -585,59 +585,48 @@
             </table>
       	}
   
-		@if (showNextMonth5 == true) {
+	@if (showNextMonth5 == true) {
             <table class="course span12">
               	<!--show the name of nextMonth5-->
                 @if (nextMonth5 == 1) {
-          			<th colspan="10">January</th>
-          		}
-          
-          		@if (nextMonth5 == 2) {
-          			<th colspan="10">February</th>
-          		}
-          
+          	    th colspan="10">January</th>
+          	}
+                @if (nextMonth5 == 2) {
+          	    <th colspan="10">February</th>
+          	}
                 @if (nextMonth5 == 3) {
-                	<th colspan="10">March</th>
-                }
-                                
+                    <th colspan="10">March</th>
+                }            
                 @if (nextMonth5 == 4) {
-                	<th colspan="10">April</th>
-                }
-                              
+                    <th colspan="10">April</th>
+                }          
                 @if (nextMonth5 == 5) {
-                	<th colspan="10">May</th>
-                }
-                              
+                    <th colspan="10">May</th>
+                }           
                 @if (nextMonth5 == 6) {
-                	<th colspan="10">June</th>
-                }
-                              
+                    <th colspan="10">June</th>
+                }             
                 @if (nextMonth5 == 7) {
-                	<th colspan="10">July</th>
-                }
-                              
+                    <th colspan="10">July</th>
+                }            
                 @if (nextMonth5 == 8) {
-                	<th colspan="10">August</th>
-                }
-                              
+                    <th colspan="10">August</th>
+                }           
                 @if (nextMonth5 == 9) {
-                	<th colspan="10">September</th>
-                }
-                              
+                    <th colspan="10">September</th>
+                }            
                 @if (nextMonth5 == 10) {
-                	<th colspan="10">October</th>
-                }
-                              
+                    <th colspan="10">October</th>
+                }           
                 @if (nextMonth5 == 11) {
-                	<th colspan="10">November</th>
-                }
-                              
+                    <th colspan="10">November</th>
+                }          
                 @if (nextMonth5 == 0) {
-                	<th colspan="10">December</th>
+                    <th colspan="10">December</th>
                 }
              
                 @{
-              		//sort list after day in month
+              	    //sort list after day in month
                     nextMonth5List.Sort((x, y) => x.Day.CompareTo(y.Day));
                 }
                                         
@@ -647,64 +636,30 @@
                         <td> @course.Date,</td>
                       	<td>@course.Location</td>
                         <td>@course.Price</td> 
-      					@if (course.Status == false) {
-                        	<td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
-      					}
-      					else {
-      						<td>Closed</td>
-      					}
+      			@if (course.Status == false) {
+                            <td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
+      			}
+      			else {
+      			    <td>Closed</td>
+      			}
                     </tr>
                 }                              
             </table>
       	}   
      
-	</div>                     
+    </div>                     
 </div>
 
 
-<!-- Modal -->
-<div id="popup" class="modal hide fade">
-	<div class="modal-header">
-    	<a class="close_popup" data-dismiss="modal"><i class="icon icon-remove"></i></a>
-  	</div>
-
-  	<div class="modal-body">
-    
-		<h2 class="header">Signup</h2>
-      
-      <form method="post" id="FormSave1" name="FormSave1" enctype="multipart/form-data" action="/Admin/Public/404.aspx" onsubmit="s=function(e){e.elements['FormCH1_h'].value='ac962a5b7e8d75b83e6b63f14b542655';e.elements['_sys_to_email'].value='';e.setAttribute('action', 'http://engage.dynamicweb.com/Default.aspx?ID=6495');return true};return s(this)">  
-	  <input type="hidden" name="ID" value="6495" /><input type="hidden" name="FormPID" value="22711" /><input type="hidden" name="FormID" value="1" /><input type="hidden" name="SubmitForm" value="true" /><input type="hidden" name="_sys_to_email" value="bot@dynamicweb.com" />
-      <input type="hidden" name="FormCH1_h" value="ac962a5b7e8d75b83e6b63f14b542655" />
-      <input type="hidden" name="FormCH1_f" value="6c249e775af617353fb1c963e2859346" />
-      <input type="hidden" name="FormCH1_s" value="94dcf0e180702e9672cb08af7f70d36b" />
-      <input type="hidden" name="FormCH1_i" value="6d52419b47fa62b1bd029e699b5316ec" />
-
-			<!--input fields-->
-			<input class = "input-block-level" type ="text" name='engageSignUp_Name' id ='engageSignUp_Name' value = "" placeholder="Name"/>
-			<input class = "input-block-level" type ="text" name ='engageSignUp_Email' id ='engageSignUp_Email' value = "" placeholder="Email"/>
-    		<input class = "input-block-level" type ="text" name='engageSignUp_Course' id ='engageSignUp_Course' value=""/>
-    		<input class = "input-block-level" type ="text" name='engageSignUp_Date' id ='engageSignUp_Date' value=""/> 
-    		<textarea class = "input-block-level" type ="text" name = 'engageSignUp_Reference' id ='engageSignUp_Reference' placeholder="Reference"></textarea>  
-			<p style="color:white">@Translate("course_terms_text") <a target="_blank" href="
-			Default.aspx/Default.aspx?ID=9199
-              ">@Translate("course_terms_link")</a></p>
-
-			<button class ="btn btn-primary" type = "submit">Submit</button>
-
-		<!--FormEnd-->
-		</form>
-
-	</div>
-</div> 
 
 <script>
 
 function passVariables(course, date, location) {
-  var dateLocation = date + " in " + location;
-  document.getElementById("engageSignUp_Course").value = course;
-  document.getElementById("engageSignUp_Date").value = dateLocation;
-  document.getElementById("engageSignUp_Location").value = location;
-  }  
+    var dateLocation = date + " in " + location;
+    document.getElementById("engageSignUp_Course").value = course;
+    document.getElementById("engageSignUp_Date").value = dateLocation;
+    document.getElementById("engageSignUp_Location").value = location;
+}  
   
 </script>
 
