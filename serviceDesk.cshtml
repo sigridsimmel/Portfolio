@@ -37,45 +37,39 @@ button[type="reset"] {
     
 <!--convert list to array-->  
 @{
-string[] solutionsArray = solutionsList.ToArray();     
+    string[] solutionsArray = solutionsList.ToArray();     
 }
   
-    <div id="form" class="span12 nomargin">
-      <form onsubmit="return validate()" style="width:100%" method="post" class="form-horizontal" action="/service-desk/your-cases" enctype="multipart/form-data">
-            <input type="hidden" id="businessImpactDescription" name="businessImpactDescription" value="" />
-        	<input type="hidden" id="caseType" name="caseType" value ="2"/>
-          	<input type="hidden" id="id" name="id" value="" />
+<div id="form" class="span12 nomargin">
+    <form onsubmit="return validate()" style="width:100%" method="post" class="form-horizontal" action="/service-desk/your-cases" enctype="multipart/form-data">
+        <input type="hidden" id="businessImpactDescription" name="businessImpactDescription" value="" />
+        <input type="hidden" id="caseType" name="caseType" value ="2"/>
+        <input type="hidden" id="id" name="id" value="" />
         
-            <div class="control-group">
-                <label class="control-label" for="title">Title</label>
-                <div class="controls">
-                    <input id="title" name="title" class="span6" onchange="validateTitle()" type="text" />
-                    <div id="markBoxTitle" class="help-inline"></div>
-                    <span id="errorTitle" class="help-inline"></span>
-                </div>
+        <div class="control-group">
+            <label class="control-label" for="title">Title</label>
+            <div class="controls">
+                <input id="title" name="title" class="span6" onchange="validateTitle()" type="text" />
+                <div id="markBoxTitle" class="help-inline"></div>
+                <span id="errorTitle" class="help-inline"></span>
             </div>
+        </div>
 
-            <div class="control-group">
-                <label class="control-label" for="customer">Customer</label>
-                <div class="controls">
-                    <select id="customer" class="span6" name="customer" onchange="validateCostumer();solutionOptions(this);validateSolutions()">
-
-                        <option id="startOptionCostumer" value="startOptionCostumer">Please select</option>
-						@foreach (var i in GetLoop("CustomersLoop")){
-
+        <div class="control-group">
+            <label class="control-label" for="customer">Customer</label>
+            <div class="controls">
+                <select id="customer" class="span6" name="customer" onchange="validateCostumer();solutionOptions(this);validateSolutions()">
+                    <option id="startOptionCostumer" value="startOptionCostumer">Please select</option>
+		    @foreach (var i in GetLoop("CustomersLoop")){
                         <option value="@i.GetValue("CustomerName")">
                             @i.GetValue("CustomerName")
-                
                         </option>
- 
-                        }
-
-                    </select>
-                    <div id="markBoxCostumer" class="help-inline"></div>
-                    <span id="errorCostumer" class="help-inline"></span>
-                </div>
+                    }
+                </select>
+                <div id="markBoxCostumer" class="help-inline"></div>
+                <span id="errorCostumer" class="help-inline"></span>
             </div>
-      
+        </div>
    
         <div class="control-group">
                 <label class="control-label" for="solutions">Solution</label>
