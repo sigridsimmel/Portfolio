@@ -72,28 +72,25 @@ button[type="reset"] {
         </div>
    
         <div class="control-group">
-                <label class="control-label" for="solutions">Solution</label>
-                <div class="controls">
-                    <select id="solutions" class="span6" name="solutions" onchange="validateSolutions()">
-                        <option id="startOptionSolutions" value="startOptionSolutions">Please select</option>
-                    
-						<!--here more options is made in javascript-->
-                    </select>
-                    <div id="markBoxSolutions" class="help-inline"></div>
-                    <span id="errorSolutions" class="help-inline"></span>
-                </div>
+            <label class="control-label" for="solutions">Solution</label>
+            <div class="controls">
+                <select id="solutions" class="span6" name="solutions" onchange="validateSolutions()">
+                    <option id="startOptionSolutions" value="startOptionSolutions">Please select</option>
+		    <!--here more options are made in javascript-->
+                </select>
+                <div id="markBoxSolutions" class="help-inline"></div>
+                <span id="errorSolutions" class="help-inline"></span>
             </div>
+        </div>
               
-    
-
-            <div id="why" class="control-group">
-                <label class="control-label" for="textareaWhy" id="whylabel">What is the impact for the customer?</label>
-                <div class="controls">
-                    <textarea name="textareaWhy" id="textareaWhy" class="span6" cols="80" onchange="validateWhy()"rows="4"></textarea>
-                    <div id="markBoxWhy" class="help-inline"></div>
-                    <span id="errorWhy" class="help-inline"></span>
-                </div>
+        <div id="why" class="control-group">
+            <label class="control-label" for="textareaWhy" id="whylabel">What is the impact for the customer?</label>
+            <div class="controls">
+                <textarea name="textareaWhy" id="textareaWhy" class="span6" cols="80" onchange="validateWhy()"rows="4"></textarea>
+                <div id="markBoxWhy" class="help-inline"></div>
+                <span id="errorWhy" class="help-inline"></span>
             </div>
+        </div>
 
             <div class="control-group">
                 <label id="URLtekst" class="control-label" for="solutionUrl">URL</label>
