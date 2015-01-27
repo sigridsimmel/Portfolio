@@ -3,40 +3,38 @@
 <style type="text/css">
 
 button[type="submit"] {
-        position: relative;
-        float: right;
-        left: -41%;
-    }
+    position: relative;
+    float: right;
+    left: -41%;
+}
 
-    button[type="reset"] {
-        position: relative;
-        float: right;
-        left: -41%;
-        margin-right: 4px;
-    }
+button[type="reset"] {
+    position: relative;
+    float: right;
+    left: -41%;
+    margin-right: 4px;
+}
   
-  	.nomargin {
-		margin-left: 0px;
-  	}
+.nomargin {
+    margin-left: 0px;
+}
 
 </style>
+
 <!--create new list-->  
 @{
-  	List<string> solutionsList = new List<string>();
+    List<string> solutionsList = new List<string>();
 }  
 
 <!--Add relevant variables to list-->  
 @foreach (var i in GetLoop("SolutionsLoop")){
-  	var costumerName = i.GetString("SolutionCustomerName");
-  	var solutionName = i.GetString("SolutionName");
-  	var solutionId = i.GetString("SolutionID");
-  	var toList = costumerName +"|" + solutionName + "|" + solutionId;
-  
-	solutionsList.Add(toList);
-   
+    var costumerName = i.GetString("SolutionCustomerName");
+    var solutionName = i.GetString("SolutionName");
+    var solutionId = i.GetString("SolutionID");
+    var toList = costumerName +"|" + solutionName + "|" + solutionId;
+    solutionsList.Add(toList);
 }
     
-
 <!--convert list to array-->  
 @{
 string[] solutionsArray = solutionsList.ToArray();     
