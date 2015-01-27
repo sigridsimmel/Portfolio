@@ -138,6 +138,7 @@ button[type="reset"] {
 <script>
     //regular expression to check if a URL is valid
     var RegExpURL = /\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.]|[a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i;  
+    
     //regular expression to check if a string is empty 
     var emptyString = /^$/;
     //regular expression to check if a string contains white space
@@ -338,7 +339,6 @@ button[type="reset"] {
             //field validation is okay
             submitDescription = true;
         }
-
         else {
             //show error-sign
             box.innerHTML = signRed;
@@ -349,9 +349,9 @@ button[type="reset"] {
         }
     }
   
-	function validateSteps() {
+    function validateSteps() {
         var content = document.getElementById("steps").value;
-  		var wordNumber = content.split(/[\s|\n]/); 
+  	var wordNumber = content.split(/[\s|\n]/); 
         var box = document.getElementById("markBoxSteps");
 
         //if input is min. 6 words or a valid URL
@@ -363,7 +363,6 @@ button[type="reset"] {
             //field validation is okay
             submitSteps = true;
         }
-
         else {
             //show error-sign
             box.innerHTML = signRed;
@@ -374,96 +373,81 @@ button[type="reset"] {
         }
     }
   
-  	function resetValidation() {
-
-		//remove validations signs and comments
-  		document.getElementById("markBoxTitle").innerHTML = "";
-  		document.getElementById("errorTitle").innerHTML = "";
-  		submitTitle = false;
+    function resetValidation() {
+        //remove validations signs and comments
+  	document.getElementById("markBoxTitle").innerHTML = "";
+  	document.getElementById("errorTitle").innerHTML = "";
+  	submitTitle = false;
   
-  		document.getElementById("markBoxCostumer").innerHTML = "";
-  		document.getElementById("errorCostumer").innerHTML = "";
-  		submitCostumer = false;
+  	document.getElementById("markBoxCostumer").innerHTML = "";
+  	document.getElementById("errorCostumer").innerHTML = "";
+  	submitCostumer = false;
   
-  		document.getElementById("markBoxSolutions").innerHTML = "";
-  		document.getElementById("errorSolutions").innerHTML = "";
-  		submitSolutions = false;
+  	document.getElementById("markBoxSolutions").innerHTML = "";
+  	document.getElementById("errorSolutions").innerHTML = "";
+  	submitSolutions = false;
   
-		document.getElementById("markBoxWhy").innerHTML = "";
-  		document.getElementById("errorWhy").innerHTML = "";
-  		submitWhy = false;
+	document.getElementById("markBoxWhy").innerHTML = "";
+  	document.getElementById("errorWhy").innerHTML = "";
+  	submitWhy = false;
   
-  		document.getElementById("markBoxURL").innerHTML = "";
-  		document.getElementById("errorURL").innerHTML = "";
-  		submitURL = false;
+  	document.getElementById("markBoxURL").innerHTML = "";
+  	document.getElementById("errorURL").innerHTML = "";
+  	submitURL = false;
   
-  		document.getElementById("markBoxDescription").innerHTML = "";
-  		document.getElementById("errorDescription").innerHTML = "";
-  		submitDescription = false;
+  	document.getElementById("markBoxDescription").innerHTML = "";
+  	document.getElementById("errorDescription").innerHTML = "";
+  	submitDescription = false;
   	
-  		document.getElementById("markBoxSteps").innerHTML = "";
-  		document.getElementById("errorSteps").innerHTML = "";
-  		submitSteps = false;
-  	}    
+  	document.getElementById("markBoxSteps").innerHTML = "";
+  	document.getElementById("errorSteps").innerHTML = "";
+  	submitSteps = false;
+    }    
 
     function validate() {
-
         if (submitOK == false) {
             errorComments();
         }
-
         if (submitOK == true) {
             submit();
-          
         }
         return false;
     }
 
     function errorComments() {
-
         //if each field has not been changed or can not be validated run the validation function
-		//else the field can be validated
-  		
+	//else the field can be validated
         if (submitTitle == false) {
             validateTitle();
         }  
-
         if (submitCostumer == false) {
             validateCostumer();
         }
-  
         if (submitSolutions == false) {
             validateSolutions();
         }
-
         if (submitWhy == false) {
             validateWhy();
         }
-
         if (submitURL == false) {
             validateURL();
         }
-
         if (submitDescription == false) {
             validateDescription();
         }
-
         if (submitSteps == false) {
             validateSteps();
         }
-
-		//if all fields can be validated
+	//if all fields can be validated
         if (submitTitle == true && submitCostumer == true && submitSolutions == true && submitWhy == true && submitURL == true && submitDescription == true && submitSteps == true) {
-			//vis pop-up
-  			alert("Thank you for creating a case!")
-  
+	    //vis pop-up
+  	    alert("Thank you for creating a case!")
             //OK to submit
             submitOK = true;
         }
-  
-  		else {
-  		return false;
-  		}
+  	else {
+  	    return false;
+  	}
     }
   
 	function setValues() {
