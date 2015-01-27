@@ -337,74 +337,63 @@
             </table>
       	}
   
-		@if (showNextMonth == true) {
+	@if (showNextMonth == true) {
             <table class="course span12">
               	<!--show the name of nextMonth-->
                 @if (nextMonth == 1) {
-          			<th colspan="10">@Translate("January","January")</th>
-          		}
-          
-          		@if (nextMonth == 2) {
-          			<th colspan="10">@Translate("February","February")</th>
-          		}
-          
+          	    <th colspan="10">@Translate("January","January")</th>
+          	}
+          	@if (nextMonth == 2) {
+          	    <th colspan="10">@Translate("February","February")</th>
+          	}
                 @if (nextMonth == 3) {
-                	<th colspan="10">@Translate("March","March")</th>
-                }
-                                
+                    <th colspan="10">@Translate("March","March")</th>
+                }                
                 @if (nextMonth == 4) {
-                	<th colspan="10">@Translate("April","April")</th>
-                }
-                              
+                    <th colspan="10">@Translate("April","April")</th>
+                }             
                 @if (nextMonth == 5) {
-                	<th colspan="10">@Translate("May","May")</th>
-                }
-                              
+                    <th colspan="10">@Translate("May","May")</th>
+                }              
                 @if (nextMonth == 6) {
-                	<th colspan="10">@Translate("June","June")</th>
-                }
-                              
+                    <th colspan="10">@Translate("June","June")</th>
+                }          
                 @if (nextMonth == 7) {
-                	<th colspan="10">@Translate("July","July")</th>
-                }
-                              
+                    <th colspan="10">@Translate("July","July")</th>
+                }            
                 @if (nextMonth == 8) {
-                	<th colspan="10">@Translate("August","August")</th>
-                }
-                              
+                    <th colspan="10">@Translate("August","August")</th>
+                }             
                 @if (nextMonth == 9) {
-                	<th colspan="10">@Translate("September","September")</th>
-                }
-                              
+                    <th colspan="10">@Translate("September","September")</th>
+                }             
                 @if (nextMonth == 10) {
-                	<th colspan="10">@Translate("October","October")</th>
-                }
-                              
+                    <th colspan="10">@Translate("October","October")</th>
+                }             
                 @if (nextMonth == 11) {
-                	<th colspan="10">@Translate("November","November")</th>
-                }
-                              
+                    <th colspan="10">@Translate("November","November")</th>
+                }              
                 @if (nextMonth == 0) {
-                	<th colspan="10">@Translate("December","December")</th>
+                    <th colspan="10">@Translate("December","December")</th>
                 }
-             
+                
                 @{
-              		//sort list after day in month
+              	    //sort list after day in month
                     nextMonthList.Sort((x, y) => x.Day.CompareTo(y.Day));
                 }
                                         
                 @foreach (dynamic course in nextMonthList) {
                     <tr> 
-                      	<td><a href ="@course.Url" >@course.Name</a></td>  
+                        <td><a href ="@course.Url" >@course.Name</a></td>  
                         <td>@course.Date,</td>
                       	<td>@course.Location</td> 
                         <td>@course.Price</td>
-      					@if (course.Status == false) {
+      			    @if (course.Status == false) {
                         	<td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
-      					}
-      					else {
-      						<td>Closed</td>
-      					}
+      			    }
+      			    else {
+      			        <td>Closed</td>
+      			    }
                     </tr>
                 }                              
             </table>
