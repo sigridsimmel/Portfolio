@@ -135,18 +135,15 @@ button[type="reset"] {
     </form>
 </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
     //regular expression to check if a URL is valid
-  	var RegExpURL = /\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.]|[a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i;  
-  // var RegExp = /\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.]|[a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i;
-
-	//regular expression to check if a string is empty 
-	var emptyString = /^$/;
-  
+    var RegExpURL = /\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.]|[a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i;  
+    //regular expression to check if a string is empty 
+    var emptyString = /^$/;
     //regular expression to check if a string contains white space
     var whiteSpace = /\s/;
-  
+    
+    //images used for validation-signs
     var signGreen = "<img style='width:15px;' src='/Files/Images/icons-blue/engage_checkmark.jpg'>"
     var signRed = "<img src='/Files/Images/icons-blue/red_x.png'>"
 
