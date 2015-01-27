@@ -461,59 +461,48 @@
             </table>
       	}
   
-		@if (showNextMonth3 == true) {
+	@if (showNextMonth3 == true) {
             <table class="course span12">
               	<!--show the name of nextMonth3-->
                 @if (nextMonth3 == 1) {
-          			<th colspan="10">January</th>
-          		}
-          
-          		@if (nextMonth3 == 2) {
-          			<th colspan="10">February</th>
-          		}
-          
+          	    <th colspan="10">January</th>
+          	}
+          	@if (nextMonth3 == 2) {
+          	    <th colspan="10">February</th>
+          	}
                 @if (nextMonth3 == 3) {
-                	<th colspan="10">March</th>
-                }
-                                
+                    <th colspan="10">March</th>
+                }               
                 @if (nextMonth3 == 4) {
-                	<th colspan="10">April</th>
-                }
-                              
+                    <th colspan="10">April</th>
+                }           
                 @if (nextMonth3 == 5) {
-                	<th colspan="10">May</th>
-                }
-                              
+                    <th colspan="10">May</th>
+                }            
                 @if (nextMonth3 == 6) {
-                	<th colspan="10">June</th>
-                }
-                              
+                    <th colspan="10">June</th>
+                }          
                 @if (nextMonth3 == 7) {
-                	<th colspan="10">July</th>
-                }
-                              
+                    <th colspan="10">July</th>
+                }          
                 @if (nextMonth3 == 8) {
-                	<th colspan="10">August</th>
-                }
-                              
+                    <th colspan="10">August</th>
+                }          
                 @if (nextMonth3 == 9) {
-                	<th colspan="10">September</th>
-                }
-                              
+                    <th colspan="10">September</th>
+                }            
                 @if (nextMonth3 == 10) {
-                	<th colspan="10">October</th>
-                }
-                              
+                    <th colspan="10">October</th>
+                }             
                 @if (nextMonth3 == 11) {
-                	<th colspan="10">November</th>
-                }
-                              
+                    <th colspan="10">November</th>
+                }             
                 @if (nextMonth3 == 0) {
-                	<th colspan="10">December</th>
+                    <th colspan="10">December</th>
                 }
              
                 @{
-              		//sort list after day in month
+              	    //sort list after day in month
                     nextMonth3List.Sort((x, y) => x.Day.CompareTo(y.Day));
                 }
                                         
@@ -523,12 +512,12 @@
                         <td> @course.Date,</td>
                       	<td> @course.Location</td> 
                         <td>@course.Price</td> 
-      					@if (course.Status == false) {
-                        	<td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
-      					}
-      					else {
-      						<td>Closed</td>
-      					}     
+      			@if (course.Status == false) {
+                            <td><a href="@course.Url" onclick="passVariables('@course.Name', '@course.SignupDate', '@course.Location')" data-toggle="modal">Sign up</a></td> 
+      			}
+      			else {
+      			    <td>Closed</td>
+      			}     
                     </tr>
                 }                              
             </table>
