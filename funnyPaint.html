@@ -1,0 +1,403 @@
+<body>
+    <div id="wrapper">
+        <div id="solPosition">
+            <div class="sol"></div>
+        </div>
+
+        <div class="overskrift">
+            <h1>Funny Paint</h1>
+        </div>
+
+        <canvas id="canvas" height=575 width=730></canvas>
+
+        <aside>
+            <div id="toolbox">
+                <!-- knapperne for de forskellige farver -->
+                <p class="buttom-border">
+                    <button onclick="changeColor('red')" id="red" class="farve"></button>
+                    <button onclick="changeColor('blue')" id="blue" class="farve"></button>
+                    <button onclick="changeColor('green')" id="green" class="farve"></button>
+                    <button onclick="changeColor('yellow')" id="yellow" class="farve"></button>
+                    <button onclick="changeColor('black')" id="black" class="farve"></button>
+                    <button onclick="changeColor('white')" id="white" class="farve"></button>
+                </p>
+
+                <!-- forskellige "børster" -->
+                <p class="buttom-border">
+                    <button onclick="toolChange('linje')" id="linje" class="ikoner"
+                    ></button>
+                    <button onclick="toolChange('pen')" id="pen" class="ikoner"></button>
+                    <button onclick="toolChange('malerspand')" id="fill" class="ikoner"></button>
+                </p>
+                    <!-- figurer -->
+                <p class="buttom-border">
+                    <button onclick="toolChange('cirkel')" id="cirkel" class="ikoner"></button>
+                    <button onclick="toolChange('firkant')" id="firkant" class="ikoner"></button>
+                    <button onclick="#" id="trekant" class="ikoner"></button>
+                </p>
+
+                <!-- forskellige størrelser "børster" -->
+                <p class="buttom-border">
+                    <button onclick="changeLineWidth('lille')" id="lille" class="ikoner"></button>
+                    <button onclick="changeLineWidth('mellem')" id="mellem" class="ikoner"></button>
+                    <button onclick="changeLineWidth('stor')" id="stor" class="ikoner"></button>
+                </p>
+
+                <!-- knapper til værktøj -->
+                <p class="space">
+                    <button onclick="eraser()" id="eraser" class="ikoner"></button>
+                    <button onclick="undoDrawOnCanvas()" id="undo" class="ikoner"></button>
+                    <button onclick="clearCanvas()" id="clear" class="ikoner"></button>
+                </p>
+                <p class="bla">
+                    <button onclick="save2()" id="saveButton" class="ikoner"></button>
+                    <button onclick="printpage()" id="print" class="ikoner"></button>
+
+                    <!-- <button id="saveButton2" class="ikoner"></button> -->
+                </p>
+            </div>
+        </aside>
+
+    <script>
+    // Får canvas til af virke
+    var context, penDown, colorBeforeEraser, lineWidthBeforeEraser;
+    var canvasContext = document.getElementById("canvas").getContext("2d");
+    var restorePoints = [];
+    var tool = "pen";
+
+        function getElementMousePosition(element, e) {
+            var br = element.getBoundingClientRect();
+            return {
+                x: e.clientX - br.left,
+                y: e.clientY - br.top
+            };
+        }
+
+        function init() {
+            context = canvas.getContext("2d");
+            context.beginPath();
+            changeLineWidth("mellem");
+            changeColor("black",0,0,0);
+            toolChange("pen");
+
+            //del af undo
+            var canvasContext = document.getElementById("canvas").getContext("2d");
+            canvasContext.save();
+            canvasContext.fillStyle = '#fff';
+            canvasContext.fillRect(0, 0, canvasContext.canvas.width, canvasContext.canvas.height);
+            canvasContext.restore();
+        }
+
+        function mousemove(e) {
+            if (tool == "pen") {
+                var pos = getElementMousePosition(canvas, e);
+                if (penDown) {
+                    context.lineTo(pos.x, pos.y);
+                    context.stroke();
+                }
+            }
+            else if (tool == "linje") 
+            {
+                var pos = getElementMousePosition(canvas, e);
+                if (penDown) 
+                {
+                    Rgb.innerHTML = colorRed.value + ', ' + colorGreen.value + ', ' + colorBlue.value;
+                }
+                else
+                {
+                    context.moveTo(pos.x, pos.y);
+                    Rgb.innerHTML = colorRed.value + ', ' + colorGreen.value + ', ' + colorBlue.value;
+                }
+
+            }
+        } 
+
+        function mousedown(e) {
+            var pos = getElementMousePosition(canvas, e);
+
+            // del af undo
+            saveRestorePoint();
+            var canvasContext = document.getElementById("canvas").getContext("2d");
+            canvasContext.save();
+
+            context.beginPath();
+            penDown = true;
+            if(tool == "linje")
+            {
+                context.moveTo(pos.x, pos.y);
+            }
+            else if (tool == "cirkel") {
+                context.moveTo(pos.x, pos.y);
+            }
+            else if (tool == "firkant") {
+                context.moveTo(pos.x, pos.y);
+            }
+            startPos = pos;
+        }
+
+        function mouseup(e) {
+            var pos = getElementMousePosition(canvas, e);
+            penDown = false;
+            if(tool == "linje")
+            {
+                context.lineTo(pos.x, pos.y);
+                context.stroke();
+            }
+            else if(tool == "cirkel") {
+                //udregn radius
+                var h = (pos.y-startPos.y);
+                var w = (pos.x-startPos.x);
+                var radius = Math.sqrt(w*w+h*h);
+                //tegn cirkel
+                context.beginPath();
+                context.arc(startPos.x, startPos.y, radius, 0, 2*Math.PI);
+                context.stroke();
+            }
+            else if(tool == "firkant") {
+                var squarew = (pos.x-startPos.x);
+                var squareh = (pos.y-startPos.y);
+                context.rect(startPos.x, startPos.y, squarew, squareh);
+                context.stroke();
+            }else if (tool == "malerspand") {
+
+                if (toolbox.dataset.color == "red") {
+                    fillColor = -16776961;
+                }
+                if (toolbox.dataset.color == "blue") {
+                    fillColor = 65535;
+                }
+                if (toolbox.dataset.color == "green") {
+                    fillColor = 8388863;
+                }
+                if (toolbox.dataset.color == "yellow") {
+                    fillColor = -65281;
+                }
+                if (toolbox.dataset.color == "black") {
+                    fillColor = 255;
+                }
+                if (toolbox.dataset.color == "white") {
+                    fillColor = -1;
+                }
+
+                floodFill(parseInt(pos.x), parseInt(pos.y), fillColor, 100);
+            }
+
+            // del af undo
+            canvasContext.restore();
+        }
+
+        // Find farven af en pixel i canvas
+        function getPixel(pixelData, x, y) {
+            if (x < 0 || y < 0 || x >= pixelData.width || y >= pixelData.height) {
+                return NaN;
+            }
+            var pixels = pixelData.data;
+            var i = (y * pixelData.width + x) * 4;
+            return ((pixels[i + 0] & 0xFF) << 24) |
+                   ((pixels[i + 1] & 0xFF) << 16) |
+                   ((pixels[i + 2] & 0xFF) <<  8) |
+                   ((pixels[i + 3] & 0xFF) <<  0);
+        }
+
+        function setPixel(pixelData, x, y, color) {
+            var i = (y * pixelData.width + x) * 4;
+            var pixels = pixelData.data;
+            pixels[i + 0] = (color >>> 24) & 0xFF;
+            pixels[i + 1] = (color >>> 16) & 0xFF;
+            pixels[i + 2] = (color >>>  8) & 0xFF;
+            pixels[i + 3] = (color >>>  0) & 0xFF;
+        }
+
+        function diff(c1, c2) {
+            if (isNaN(c1) || isNaN(c2)) {
+                return Infinity;
+            }
+
+            var dr = ((c1 >>> 24) & 0xFF) - ((c2 >>> 24) & 0xFF);
+            var dg = ((c1 >>> 16) & 0xFF) - ((c2 >>> 16) & 0xFF);
+            var db = ((c1 >>>  8) & 0xFF) - ((c2 >>>  8) & 0xFF);
+            var da = ((c1 >>>  0) & 0xFF) - ((c2 >>>  0) & 0xFF);
+
+            return dr*dr + dg*dg + db*db + da*da;
+        }
+
+        function floodFill(x, y, replacementColor, delta) {
+            var current, w, e, stack, color, cx, cy;
+            var pixelData = context.getImageData(0, 0, canvas.width, canvas.height);
+            var done = [];
+            for (var i = 0; i < canvas.width; i++) {
+                done[i] = [];
+            }
+
+            var targetColor = getPixel(pixelData, x, y);
+            delta *= delta;
+
+            stack = [ [x, y] ];
+            done[x][y] = true;
+            while ((current = stack.pop())) {
+                cx = current[0];
+                cy = current[1];
+
+                if (diff(getPixel(pixelData, cx, cy), targetColor) <= delta) {
+                    setPixel(pixelData, cx, cy, replacementColor);
+
+                    w = e = cx;
+                    while (w > 0 && diff(getPixel(pixelData, w - 1, cy), targetColor) <= delta) {
+                        --w;
+                        if (done[w][cy]) break;
+                        setPixel(pixelData, w, cy, replacementColor);
+                    }
+                    while (e < pixelData.width - 1 && diff(getPixel(pixelData, e + 1, cy), targetColor) <= delta) {
+                        ++e;
+                        if (done[e][cy]) break;
+                        setPixel(pixelData, e, cy, replacementColor);
+                    }
+
+                    for (cx = w; cx <= e; cx++) {
+                        if (cy > 0) {
+                            color = getPixel(pixelData, cx, cy - 1);
+                            if (diff(color, targetColor) <= delta) {
+                                if (!done[cx][cy - 1]) {
+                                    stack.push([cx, cy - 1]);
+                                    done[cx][cy - 1] = true;
+                                }
+                            }
+                        }
+                        if (cy < canvas.height - 1) {
+                            color = getPixel(pixelData, cx, cy + 1);
+                            if (diff(color, targetColor) <= delta) {
+                                if (!done[cx][cy + 1]) {
+                                    stack.push([cx, cy + 1]);
+                                    done[cx][cy + 1] = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            context.putImageData(pixelData, 0, 0, 0, 0, canvas.width, canvas.height);
+        }
+
+        // Funktionen for farveknapperne
+        function changeColor(color,r,g,b) {
+            context.strokeStyle = color;
+            colorBeforeEraser = color;
+            toolbox.dataset.color = color;
+
+            toolbox.dataset.red = r;
+            toolbox.dataset.green = g;
+            toolbox.dataset.blue = b;
+        }
+
+        // Decimal farve værdi til hex farve
+        function d2h(d) {
+            return d.toString(16);
+        }
+
+        // Hex farve værdi til decimal farve
+        function h2d(h) {
+            return parseInt(h,16);
+        }
+
+        // Funktionen for forskellige "børster" og figurer
+        function toolChange(toolType) {
+            context.globalCompositeOperation = "source-over";
+            changeColor(colorBeforeEraser);
+            changeLineWidth(lineWidthBeforeEraser);
+            tool = toolType;
+            toolbox.dataset.tool = tool;
+        }
+
+        // funktionen for de forskellige størrelse "bøster"
+        function changeLineWidth(width){
+            if(width=="lille"){
+                brede = 3;
+            }
+            if(width=="mellem"){
+                brede = 6;
+            }
+
+            if(width=="stor"){
+                brede = 12;
+            }
+
+            var ctx = document.getElementById('canvas').getContext('2d');
+            ctx.lineWidth = brede;
+            lineWidthBeforeEraser = width;
+            toolbox.dataset.line = width;
+        }
+
+        //funktionen for hviskelæder
+        function eraser() {
+            tool = "pen";
+            //draw a black transparent stroke
+            context.globalCompositeOperation = "destination-out";
+            //context.strokeStyle = "rgba(0,0,0,1)";
+
+            changeLineWidth("mellem");
+            context.lineCap = "round";
+            toolbox.dataset.tool = "eraser";
+        }
+
+        // Funkrionen for Undo
+        function saveRestorePoint() {
+            // Get the current canvas drawing as a base64 encoded value
+            var oCanvas = document.getElementById("canvas");
+            var imgSrc = oCanvas.toDataURL("image/png");
+
+            // and store this value as a 'restoration point', to which we can later revert
+            restorePoints.push(imgSrc);
+        }
+
+        function undoDrawOnCanvas() {
+            // If we have some restore points
+            if (restorePoints.length > 0) {
+                // Create a new Image object
+                var oImg = new Image();
+                // When the image object is fully loaded in the memory...
+                oImg.onload = function() {
+                    // Get the canvas context
+                    var canvasContext = document.getElementById("canvas").getContext("2d");     
+                    // and draw the image (restore point) on the canvas. That would overwrite anything
+                    // already drawn on the canvas, which will basically restore it to a previous point.
+                    canvasContext.drawImage(oImg, 0, 0);
+                }
+                // The source of the image, is the last restoration point
+                oImg.src = restorePoints.pop();
+            }
+        }
+
+        // Funktionen for slet alt/skraldespand
+        function clearCanvas(){
+            context.clearRect(0, 0, 750, 575);
+        }
+
+        // Funktionen for at gemme
+        function save(){
+        var url = canvas.toDataURL();
+            location.href = url;
+        }
+
+        function save2() {
+            var canvas  = document.getElementById("canvas");
+            var dataURL = canvas.toDataURL();
+
+            window.open(dataURL, "toDataURL() image", "width=730, height=575");
+            //window.open(canvas.toDataURL('image/png'));
+        }
+
+        // Funktionen for print
+        function printpage(){
+            window.print();
+        }
+
+        init();
+
+        canvas.addEventListener("mousemove", mousemove);
+        canvas.addEventListener("mousedown", mousedown);
+        canvas.addEventListener("mouseup", mouseup);
+
+        <!-- saveButton.addEventListener("click", save); -->
+    </script>
+</body>
