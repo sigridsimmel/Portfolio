@@ -583,169 +583,169 @@ window.onscroll = function () {
 }
   
 function scrollToTop() {
-	window.scrollTo(0,0); 
+    window.scrollTo(0,0); 
 }
   
 function scrollToBottom() {
-	window.scrollTo(0,document.body.scrollHeight);
+    window.scrollTo(0,document.body.scrollHeight);
 }  
 
 //make the first tab selected when you enter page  
 selectTab(1);   
 
 function selectTab(tab) {
-	var selectedTab;
-	var notSelectedTab1;
-  	var notSelectedTab2;
-  	var notSelectedTab3;
-  	var notSelectedTab4;
+    var selectedTab;
+    var notSelectedTab1;
+    var notSelectedTab2;
+    var notSelectedTab3;
+    var notSelectedTab4;
   
-  	var displayedContent;
-  	var notDisplayedContent1;
-  	var notDisplayedContent2;
-  	var notDisplayedContent3;
-  	var notDisplayedContent4;
+    var displayedContent;
+    var notDisplayedContent1;
+    var notDisplayedContent2;
+    var notDisplayedContent3;
+    var notDisplayedContent4;
   
-  	scrollToTop();
+    scrollToTop();
   
     if (tab == 1) {
   
-  		//display infoboxes for this tab
-  		displayInfoboxes(1);
+        //display infoboxes for this tab
+  	displayInfoboxes(1);
   
-  		//display tipboxes for this tab
-  		displayTipboxes(1); 
+  	//display tipboxes for this tab
+  	displayTipboxes(1); 
   
-  		selectedTab = document.getElementById("firstTab");
-		notSelectedTab1 = document.getElementById("secondTab");
-  		notSelectedTab2 = document.getElementById("thirdTab");
-  		notSelectedTab3 = document.getElementById("fourthTab");
-  		notSelectedTab4 = document.getElementById("fifthTab");
+  	selectedTab = document.getElementById("firstTab");
+	notSelectedTab1 = document.getElementById("secondTab");
+  	notSelectedTab2 = document.getElementById("thirdTab");
+  	notSelectedTab3 = document.getElementById("fourthTab");
+  	notSelectedTab4 = document.getElementById("fifthTab");
   
-  		displayedContent = document.getElementById("firstTabContent");
-  		notDisplayedContent1 = document.getElementById("secondTabContent");
-  		notDisplayedContent2 = document.getElementById("thirdTabContent");
-  		notDisplayedContent3 = document.getElementById("fourthTabContent");
-  		notDisplayedContent4 = document.getElementById("fifthTabContent");
-  	}
+  	displayedContent = document.getElementById("firstTabContent");
+  	notDisplayedContent1 = document.getElementById("secondTabContent");
+  	notDisplayedContent2 = document.getElementById("thirdTabContent");
+  	notDisplayedContent3 = document.getElementById("fourthTabContent");
+  	notDisplayedContent4 = document.getElementById("fifthTabContent");
+    }
   
-  	if (tab == 2) {
+    if (tab == 2) {
   
-  		//display infoboxes for this tab
-  		displayInfoboxes(2);
+        //display infoboxes for this tab
+  	displayInfoboxes(2);
   
-  		//display tipboxes for this tab
-  		displayTipboxes(2);  
+  	//display tipboxes for this tab
+  	displayTipboxes(2);  
   
-  		selectedTab = document.getElementById("secondTab");
-		notSelectedTab1 = document.getElementById("firstTab");
-  		notSelectedTab2 = document.getElementById("thirdTab");
-  		notSelectedTab3 = document.getElementById("fourthTab");
-  		notSelectedTab4 = document.getElementById("fifthTab");
+  	selectedTab = document.getElementById("secondTab");
+	notSelectedTab1 = document.getElementById("firstTab");
+  	notSelectedTab2 = document.getElementById("thirdTab");
+  	notSelectedTab3 = document.getElementById("fourthTab");
+  	notSelectedTab4 = document.getElementById("fifthTab");
   
-  		displayedContent = document.getElementById("secondTabContent");
-  		notDisplayedContent1 = document.getElementById("firstTabContent");
-  		notDisplayedContent2 = document.getElementById("thirdTabContent");
-  		notDisplayedContent3 = document.getElementById("fourthTabContent");
-  		notDisplayedContent4 = document.getElementById("fifthTabContent");
-  	}
+  	displayedContent = document.getElementById("secondTabContent");
+  	notDisplayedContent1 = document.getElementById("firstTabContent");
+  	notDisplayedContent2 = document.getElementById("thirdTabContent");
+  	notDisplayedContent3 = document.getElementById("fourthTabContent");
+  	notDisplayedContent4 = document.getElementById("fifthTabContent");
+    }
   
-	if (tab == 3) {
+    if (tab == 3) {
   
-  		//display infoboxes for this tab
-  		displayInfoboxes(3); 
+        //display infoboxes for this tab
+  	displayInfoboxes(3); 
   
-  		//display tipboxes for this tab
-  		displayTipboxes(3);  
+  	//display tipboxes for this tab
+  	displayTipboxes(3);  
   		
-  		selectedTab = document.getElementById("thirdTab");
-		notSelectedTab1 = document.getElementById("firstTab");
-  		notSelectedTab2 = document.getElementById("secondTab");
-  		notSelectedTab3 = document.getElementById("fourthTab");
-  		notSelectedTab4 = document.getElementById("fifthTab");
+  	selectedTab = document.getElementById("thirdTab");
+	notSelectedTab1 = document.getElementById("firstTab");
+  	notSelectedTab2 = document.getElementById("secondTab");
+  	notSelectedTab3 = document.getElementById("fourthTab");
+  	notSelectedTab4 = document.getElementById("fifthTab");
   
-  		displayedContent = document.getElementById("thirdTabContent");
-  		notDisplayedContent1 = document.getElementById("firstTabContent");
-  		notDisplayedContent2 = document.getElementById("secondTabContent");
-  		notDisplayedContent3 = document.getElementById("fourthTabContent");
-  		notDisplayedContent4 = document.getElementById("fifthTabContent");
-  	}
+  	displayedContent = document.getElementById("thirdTabContent");
+  	notDisplayedContent1 = document.getElementById("firstTabContent");
+  	notDisplayedContent2 = document.getElementById("secondTabContent");
+  	notDisplayedContent3 = document.getElementById("fourthTabContent");
+  	notDisplayedContent4 = document.getElementById("fifthTabContent");
+    }
   
-	if (tab == 4) {
+    if (tab == 4) {
   
-  		//display infoboxes for this tab
-  		displayInfoboxes(4);
+        //display infoboxes for this tab
+  	displayInfoboxes(4);
   
-  		//display tipboxes for this tab
-  		displayTipboxes(4);  
+  	//display tipboxes for this tab
+  	displayTipboxes(4);  
   
-  		selectedTab = document.getElementById("fourthTab");
-		notSelectedTab1 = document.getElementById("firstTab");
-  		notSelectedTab2 = document.getElementById("secondTab");
-  		notSelectedTab3 = document.getElementById("thirdTab");
-  		notSelectedTab4 = document.getElementById("fifthTab");
+  	selectedTab = document.getElementById("fourthTab");
+	notSelectedTab1 = document.getElementById("firstTab");
+  	notSelectedTab2 = document.getElementById("secondTab");
+  	notSelectedTab3 = document.getElementById("thirdTab");
+  	notSelectedTab4 = document.getElementById("fifthTab");
   
-  		displayedContent = document.getElementById("fourthTabContent");
-  		notDisplayedContent1 = document.getElementById("firstTabContent");
-  		notDisplayedContent2 = document.getElementById("secondTabContent");
-  		notDisplayedContent3 = document.getElementById("thirdTabContent");
-  		notDisplayedContent4 = document.getElementById("fifthTabContent");
-  	}
+  	displayedContent = document.getElementById("fourthTabContent");
+  	notDisplayedContent1 = document.getElementById("firstTabContent");
+  	notDisplayedContent2 = document.getElementById("secondTabContent");
+  	notDisplayedContent3 = document.getElementById("thirdTabContent");
+  	notDisplayedContent4 = document.getElementById("fifthTabContent");
+    }
   
-	if (tab == 5) {
+    if (tab == 5) {
   
-  		//display infoboxes for this tab
-  		displayInfoboxes(5); 
+        //display infoboxes for this tab
+  	displayInfoboxes(5); 
   
-  		//display tipboxes for this tab
-  		displayTipboxes(5);  
+  	//display tipboxes for this tab
+  	displayTipboxes(5);  
   
-  		selectedTab = document.getElementById("fifthTab");
-		notSelectedTab1 = document.getElementById("firstTab");
-  		notSelectedTab2 = document.getElementById("secondTab");
-  		notSelectedTab3 = document.getElementById("thirdTab");
-  		notSelectedTab4 = document.getElementById("fourthTab");
+  	selectedTab = document.getElementById("fifthTab");
+	notSelectedTab1 = document.getElementById("firstTab");
+  	notSelectedTab2 = document.getElementById("secondTab");
+  	notSelectedTab3 = document.getElementById("thirdTab");
+  	notSelectedTab4 = document.getElementById("fourthTab");
   
-  		displayedContent = document.getElementById("fifthTabContent");
-  		notDisplayedContent1 = document.getElementById("firstTabContent");
-  		notDisplayedContent2 = document.getElementById("secondTabContent");
-  		notDisplayedContent3 = document.getElementById("thirdTabContent");
-  		notDisplayedContent4 = document.getElementById("fourthTabContent");
-  	}   
+  	displayedContent = document.getElementById("fifthTabContent");
+  	notDisplayedContent1 = document.getElementById("firstTabContent");
+  	notDisplayedContent2 = document.getElementById("secondTabContent");
+  	notDisplayedContent3 = document.getElementById("thirdTabContent");
+  	notDisplayedContent4 = document.getElementById("fourthTabContent");
+    }   
 
-  	displayedContent.style.display = "block";
-  	notDisplayedContent1.style.display = "none";
-  	notDisplayedContent2.style.display = "none";
-  	notDisplayedContent3.style.display = "none";
-  	notDisplayedContent4.style.display = "none";
+    displayedContent.style.display = "block";
+    notDisplayedContent1.style.display = "none";
+    notDisplayedContent2.style.display = "none";
+    notDisplayedContent3.style.display = "none";
+    notDisplayedContent4.style.display = "none";
 
-  	//selected tab button
-  	selectedTab.style.backgroundColor = "#f7f7f7";
-  	selectedTab.style.borderStyle = "solid";
-  	selectedTab.style.borderBottom = "none";
-  	selectedTab.style.fontWeight = "bold";
-  	selectedTab.style.color = "black";
+    //selected tab button
+    selectedTab.style.backgroundColor = "#f7f7f7";
+    selectedTab.style.borderStyle = "solid";
+    selectedTab.style.borderBottom = "none";
+    selectedTab.style.fontWeight = "bold";
+    selectedTab.style.color = "black";
   
-	//not selected tab buttons
-  	notSelectedTab1.style.backgroundColor = "#8b8b8b";
-  	notSelectedTab1.style.borderStyle = "none";
-  	notSelectedTab1.style.fontWeight = "normal";
-  	notSelectedTab1.style.color = "white";
+    //not selected tab buttons
+    notSelectedTab1.style.backgroundColor = "#8b8b8b";
+    notSelectedTab1.style.borderStyle = "none";
+    notSelectedTab1.style.fontWeight = "normal";
+    notSelectedTab1.style.color = "white";
   
-  	notSelectedTab2.style.backgroundColor = "#8b8b8b";
-  	notSelectedTab2.style.borderStyle = "none";
-  	notSelectedTab2.style.fontWeight = "normal";
-  	notSelectedTab2.style.color = "white";
+    notSelectedTab2.style.backgroundColor = "#8b8b8b";
+    notSelectedTab2.style.borderStyle = "none";
+    notSelectedTab2.style.fontWeight = "normal";
+    notSelectedTab2.style.color = "white";
   
-  	notSelectedTab3.style.backgroundColor = "#8b8b8b";
-  	notSelectedTab3.style.borderStyle = "none";
-  	notSelectedTab3.style.fontWeight = "normal";
-  	notSelectedTab3.style.color = "white";
+    notSelectedTab3.style.backgroundColor = "#8b8b8b";
+    notSelectedTab3.style.borderStyle = "none";
+    notSelectedTab3.style.fontWeight = "normal";
+    notSelectedTab3.style.color = "white";
   
-  	notSelectedTab4.style.backgroundColor = "#8b8b8b";
-  	notSelectedTab4.style.borderStyle = "none";
-  	notSelectedTab4.style.fontWeight = "normal";
-  	notSelectedTab4.style.color = "white";  
+    notSelectedTab4.style.backgroundColor = "#8b8b8b";
+    notSelectedTab4.style.borderStyle = "none";
+    notSelectedTab4.style.fontWeight = "normal";
+    notSelectedTab4.style.color = "white";  
 }
   
 function displayTipboxes (tabSelected) {
