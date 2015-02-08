@@ -202,64 +202,62 @@ h2.subheader {
 
 <div class="span9">
   
-	@{  
+    @{  
+        var firstTabList = new List<dynamic>(); 
+        var secondTabList = new List<dynamic>();
+        var thirdTabList = new List<dynamic>();
+        var fourthTabList = new List<dynamic>();
+        var fifthTabList = new List<dynamic>();
+    }
   
-		var firstTabList = new List<dynamic>(); 
-		var secondTabList = new List<dynamic>();
-  		var thirdTabList = new List<dynamic>();
-  		var fourthTabList = new List<dynamic>();
-  		var fifthTabList = new List<dynamic>();
+    <div id="updateDiv">
+        <p>Updated on: @GetDate("Item.UpdatedOn").ToShortDateString()</p>
+    </div>
+  
+    <div class="margin">
+        <h1 id="pagetitle" class="pagetitle">@GetValue("Item.Page_Title")</h1>
+    </div> 
+  
+    <div class="introduction margin">
+        <p>@GetValue("Item.WhereTo_Start")</p>
+    </div>  
+  
+    @foreach (var item in GetLoop("Item.Subjects")) {
+        if (item.GetInteger("Item.Subjects.LoopCounter") == 1) {
+            {
+                //Add to list                        
+		firstTabList.Add(new {
+		    Title = item.GetValue("Item.Subjects.Title"),
+  		    Text = item.GetValue("Item.Subjects.Text"),
+  		    VersionBox1Text = item.GetString("Item.Subjects.VersionBox1Text"),
+  		    TipBox1Text = item.GetValue("Item.Subjects.TipBox1Text"),
+  		    InfoBox1Header = item.GetValue("Item.Subjects.InfoBox1Header"),
+  		    InfoBox1Text = item.GetValue("Item.Subjects.InfoBox1Text"),
+  		    InfoBox2Header = item.GetValue("Item.Subjects.InfoBox2Header"),
+  	            InfoBox2Text = item.GetValue("Item.Subjects.InfoBox2Text"),
+  		    InfoBox3Header = item.GetValue("Item.Subjects.InfoBox3Header"),
+  		    InfoBox3Text = item.GetValue("Item.Subjects.InfoBox3Text")
+		});
+	    }       
 	}
   
-  	<div id="updateDiv">
-  		<p>Updated on: @GetDate("Item.UpdatedOn").ToShortDateString()</p>
-  	</div>
-  
-  	<div class="margin">
-		<h1 id="pagetitle" class="pagetitle">@GetValue("Item.Page_Title")</h1>
-  	</div> 
-  
-  	<div class="introduction margin">
-  		<p>@GetValue("Item.WhereTo_Start")</p>
-  	</div>  
-  
-	@foreach (var item in GetLoop("Item.Subjects")) {
-  
-		if (item.GetInteger("Item.Subjects.LoopCounter") == 1) {
-			{
-				//Add to list                        
-				firstTabList.Add(new {
-					Title = item.GetValue("Item.Subjects.Title"),
-  					Text = item.GetValue("Item.Subjects.Text"),
-  					VersionBox1Text = item.GetString("Item.Subjects.VersionBox1Text"),
-  					TipBox1Text = item.GetValue("Item.Subjects.TipBox1Text"),
-  					InfoBox1Header = item.GetValue("Item.Subjects.InfoBox1Header"),
-  					InfoBox1Text = item.GetValue("Item.Subjects.InfoBox1Text"),
-  					InfoBox2Header = item.GetValue("Item.Subjects.InfoBox2Header"),
-  					InfoBox2Text = item.GetValue("Item.Subjects.InfoBox2Text"),
-  					InfoBox3Header = item.GetValue("Item.Subjects.InfoBox3Header"),
-  					InfoBox3Text = item.GetValue("Item.Subjects.InfoBox3Text")
-				});
-			}       
-		}
-  
-		if (item.GetInteger("Item.Subjects.LoopCounter") == 2) {
-			{
-				//Add to list                        
-				secondTabList.Add(new {
-					Title = item.GetValue("Item.Subjects.Title"),
-  					Text = item.GetValue("Item.Subjects.Text"),
-  					VersionBox1Text = item.GetString("Item.Subjects.VersionBox1Text"),
-  					TipBox1Text = item.GetValue("Item.Subjects.TipBox1Text"),
-  					InfoBox1Header = item.GetValue("Item.Subjects.InfoBox1Header"),
-  					InfoBox1Text = item.GetValue("Item.Subjects.InfoBox1Text"),
-  					InfoBox2Header = item.GetValue("Item.Subjects.InfoBox2Header"),
-  					InfoBox2Text = item.GetValue("Item.Subjects.InfoBox2Text"),
-  					InfoBox3Header = item.GetValue("Item.Subjects.InfoBox3Header"),
-  					InfoBox3Text = item.GetValue("Item.Subjects.InfoBox3Text")
-				});
-			}       
-		}
+        if (item.GetInteger("Item.Subjects.LoopCounter") == 2) {
+	    {
+	        //Add to list                        
+	        secondTabList.Add(new {
+		    Title = item.GetValue("Item.Subjects.Title"),
+  		    Text = item.GetValue("Item.Subjects.Text"),
+  		    VersionBox1Text = item.GetString("Item.Subjects.VersionBox1Text"),
+  		    TipBox1Text = item.GetValue("Item.Subjects.TipBox1Text"),
+  		    InfoBox1Header = item.GetValue("Item.Subjects.InfoBox1Header"),
+  		    InfoBox1Text = item.GetValue("Item.Subjects.InfoBox1Text"),
+  		    InfoBox2Header = item.GetValue("Item.Subjects.InfoBox2Header"),
+  		    InfoBox2Text = item.GetValue("Item.Subjects.InfoBox2Text"),
+  		    InfoBox3Header = item.GetValue("Item.Subjects.InfoBox3Header"),
+  		    InfoBox3Text = item.GetValue("Item.Subjects.InfoBox3Text")
+		});
+	    }       
+	}
   
   		if (item.GetInteger("Item.Subjects.LoopCounter") == 3) {
 			{
