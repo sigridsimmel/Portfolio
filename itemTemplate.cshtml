@@ -749,132 +749,130 @@ function selectTab(tab) {
 }
   
 function displayTipboxes (tabSelected) {
-  
-	var tipSign = "Files/Images/ParagraphIcons/tip_sign.png"
+    var tipSign = "Files/Images/ParagraphIcons/tip_sign.png"
    
-  	//find anchorpoints
-	var tipbox1Anchor =  document.getElementsByName("tipbox");
+    //find anchorpoints
+    var tipbox1Anchor =  document.getElementsByName("tipbox");
   
-  	//create variables for user input infobox1
-  	var userInputTipbox1Text;
+    //create variables for user input infobox1
+    var userInputTipbox1Text;
   
-  	//find existing boxes
-	var existingTipboxes = document.getElementsByClassName("tipBox");
+    //find existing boxes
+    var existingTipboxes = document.getElementsByClassName("tipBox");
 
-  	//create new array
-	var elementsToRemove = [];
+    //create new array
+    var elementsToRemove = [];
   
-  	//place existing boxes in new array
-	for (var i = 0; i < existingTipboxes.length; i++) {
+    //place existing boxes in new array
+    for (var i = 0; i < existingTipboxes.length; i++) {
         elementsToRemove.push(existingTipboxes[i]);
     }
   
-  	//remove existing boxes
-	for(var i = 0; i < elementsToRemove.length; i++) {
+    //remove existing boxes
+    for(var i = 0; i < elementsToRemove.length; i++) {
     	elementsToRemove[i].parentNode.removeChild(elementsToRemove[i]);
-	}
+    }
   
-  	if (tabSelected == 1) {
-  		//user input tipbox1		
-  		userInputTipbox1Text = document.getElementById("loop1Tipbox1Text").innerHTML;
-  	}
+    if (tabSelected == 1) {
+        //user input tipbox1		
+  	userInputTipbox1Text = document.getElementById("loop1Tipbox1Text").innerHTML;
+    }
   
-  	if (tabSelected == 2) {
-		//user input tipbox1		
-  		userInputTipbox1Text = document.getElementById("loop2Tipbox1Text").innerHTML;  
-  	}  	
+    if (tabSelected == 2) {
+        //user input tipbox1		
+        userInputTipbox1Text = document.getElementById("loop2Tipbox1Text").innerHTML;  
+    }  	
   
-  	if (tabSelected == 3) {
-  		userInputTipbox1Text = document.getElementById("loop3Tipbox1Text").innerHTML;    
-  	}
+    if (tabSelected == 3) {
+        userInputTipbox1Text = document.getElementById("loop3Tipbox1Text").innerHTML;    
+    }
   
-  	if (tabSelected == 4) {
-  		userInputTipbox1Text = document.getElementById("loop4Tipbox1Text").innerHTML;    
-  	}
+    if (tabSelected == 4) {
+        userInputTipbox1Text = document.getElementById("loop4Tipbox1Text").innerHTML;    
+    }
   
-  	if (tabSelected == 5) {
-  		userInputTipbox1Text = document.getElementById("loop5Tipbox1Text").innerHTML;    
-  	}   
+    if (tabSelected == 5) {
+        userInputTipbox1Text = document.getElementById("loop5Tipbox1Text").innerHTML;    
+    }   
   
-	//create tipbox1	  
+    //create tipbox1	  
     for (i = 0; i < tipbox1Anchor.length; i++) {
+    	
+        //create div
+  	var div = document.createElement( 'DIV' );
+  	//add class to div
+  	div.className = "tipBox";
   
-  		//create div
-  		var div = document.createElement( 'DIV' );
-  		//add class to div
-  		div.className = "tipBox";
+  	//create image, add class and append it to div
+  	var img = document.createElement("img");
+  	img.src = tipSign;
+  	img.className = "tipImage";
+  	div.appendChild(img)
   
-  		//create image, add class and append it to div
-  		var img = document.createElement("img");
-  		img.src = tipSign;
-  		img.className = "tipImage";
-  		div.appendChild(img)
+  	//create paragraph, add class and append it to div
+  	var p = document.createElement( 'p' );
+  	p.className = "tipText";
+  	div.appendChild(p)
   
-  		//create paragraph, add class and append it to div
-  		var p = document.createElement( 'p' );
-  		p.className = "tipText";
-  		div.appendChild(p)
-  
-  		//create textnode and append it to paragraph
-  		var textnode = document.createTextNode(userInputTipbox1Text);
-  		p.appendChild(textnode);
+ 	//create textnode and append it to paragraph
+  	var textnode = document.createTextNode(userInputTipbox1Text);
+  	p.appendChild(textnode);
 
-  		//insert div before the anchor-element
-  		tipbox1Anchor[i].parentNode.insertBefore(div, tipbox1Anchor[i]); 
-  	}
+  	//insert div before the anchor-element
+  	tipbox1Anchor[i].parentNode.insertBefore(div, tipbox1Anchor[i]); 
+    }
 }  
   
 function displayInfoboxes (tabSelected) {
-  
-	var informationSign = "Files/Images/ParagraphIcons/information_sign.png"
+    var informationSign = "Files/Images/ParagraphIcons/information_sign.png"
    
-  	//find anchorpoints
-	var infobox1Anchor =  document.getElementsByName("infobox1");
-  	var infobox2Anchor =  document.getElementsByName("infobox2");
-  	var infobox3Anchor =  document.getElementsByName("infobox3");
+    //find anchorpoints
+    var infobox1Anchor =  document.getElementsByName("infobox1");
+    var infobox2Anchor =  document.getElementsByName("infobox2");
+    var infobox3Anchor =  document.getElementsByName("infobox3");
   
-  	//create variables for user input infobox1
-  	var userInputInfobox1Header;
-  	var userInputInfobox1Text;
+    //create variables for user input infobox1
+    var userInputInfobox1Header;
+    var userInputInfobox1Text;
   
-  	//create variables for user input infobox2
-  	var userInputInfobox2Header;
-  	var userInputInfobox2Text;
+    //create variables for user input infobox2
+    var userInputInfobox2Header;
+    var userInputInfobox2Text;
   
-  	//create variables for user input infobox3
-  	var userInputInfobox3Header;
-  	var userInputInfobox3Text;
+    //create variables for user input infobox3
+    var userInputInfobox3Header;
+    var userInputInfobox3Text;
   
-  	//find existing boxes
-	var existingBoxes = document.getElementsByClassName("informationBox");
+    //find existing boxes
+    var existingBoxes = document.getElementsByClassName("informationBox");
 
-  	//create new array
-	var elementsToRemove = [];
+    //create new array
+    var elementsToRemove = [];
   
-  	//place existing boxes in new array
-	for (var i = 0; i < existingBoxes.length; i++) {
+    //place existing boxes in new array
+    for (var i = 0; i < existingBoxes.length; i++) {
         elementsToRemove.push(existingBoxes[i]);
     }
   
-  	//remove existing boxes
-	for(var i = 0; i < elementsToRemove.length; i++) {
+    //remove existing boxes
+    for(var i = 0; i < elementsToRemove.length; i++) {
     	elementsToRemove[i].parentNode.removeChild(elementsToRemove[i]);
-	}
+    }
   
-  	if (tabSelected == 1) {
+    if (tabSelected == 1) {
   
-  		//user input infobox1		
-  		userInputInfobox1Header = document.getElementById("loop1Infobox1Header").innerHTML;
-  		userInputInfobox1Text = document.getElementById("loop1Infobox1Text").innerHTML;
+        //user input infobox1		
+  	userInputInfobox1Header = document.getElementById("loop1Infobox1Header").innerHTML;
+  	userInputInfobox1Text = document.getElementById("loop1Infobox1Text").innerHTML;
   
-  		//user input infobox2		
-  		userInputInfobox2Header = document.getElementById("loop1Infobox2Header").innerHTML;
-  		userInputInfobox2Text = document.getElementById("loop1Infobox2Text").innerHTML;
+  	//user input infobox2		
+  	userInputInfobox2Header = document.getElementById("loop1Infobox2Header").innerHTML;
+  	userInputInfobox2Text = document.getElementById("loop1Infobox2Text").innerHTML;
   
-  		//user input infobox3		
-  		userInputInfobox3Header = document.getElementById("loop1Infobox3Header").innerHTML;
-  		userInputInfobox3Text = document.getElementById("loop1Infobox3Text").innerHTML;
-  	}
+  	//user input infobox3		
+  	userInputInfobox3Header = document.getElementById("loop1Infobox3Header").innerHTML;
+  	userInputInfobox3Text = document.getElementById("loop1Infobox3Text").innerHTML;
+    }
   
   	if (tabSelected == 2) {
   
