@@ -1,4 +1,3 @@
-
 <style>
 
 h2.subheader {
@@ -314,88 +313,88 @@ h2.subheader {
 	}   
     } 
   
-  		<div id="goToTop" class="" type="button" onclick="scrollToTop()">Go to top</div>
-  		<div id="goToBottom" class="" type="button" onclick="scrollToBottom()">Go to Submenu</div>  
+    <div id="goToTop" class="" type="button" onclick="scrollToTop()">Go to top</div>
+    <div id="goToBottom" class="" type="button" onclick="scrollToBottom()">Go to Submenu</div>  
       
-	<div id="tab-navigation" class="span9 no-margin"> 
+    <div id="tab-navigation" class="span9 no-margin"> 
       
-	@foreach (dynamic item in firstTabList) {
-		<div id="firstTab" class="button" type="button" onclick="selectTab(1)">@item.Title</div>
+        @foreach (dynamic item in firstTabList) {
+	    <div id="firstTab" class="button" type="button" onclick="selectTab(1)">@item.Title</div>
 	}
       
 	@foreach (dynamic item in secondTabList) {
-		<div id="secondTab" class="button" type="button" onclick="selectTab(2)">@item.Title</div>  
+	    <div id="secondTab" class="button" type="button" onclick="selectTab(2)">@item.Title</div>  
 	}
       
-    @foreach (dynamic item in thirdTabList) {
-		<div id="thirdTab" class="button" type="button" onclick="selectTab(3)">@item.Title</div>  
+        @foreach (dynamic item in thirdTabList) {
+	    <div id="thirdTab" class="button" type="button" onclick="selectTab(3)">@item.Title</div>  
 	}
       
-    @foreach (dynamic item in fourthTabList) {
-		<div id="fourthTab" class="button" type="button" onclick="selectTab(4)">@item.Title</div>  
+        @foreach (dynamic item in fourthTabList) {
+	    <div id="fourthTab" class="button" type="button" onclick="selectTab(4)">@item.Title</div>  
 	}
       
-    @foreach (dynamic item in fifthTabList) {
-		<div id="fifthTab" class="button" type="button" onclick="selectTab(5)">@item.Title</div>  
+        @foreach (dynamic item in fifthTabList) {
+	    <div id="fifthTab" class="button" type="button" onclick="selectTab(5)">@item.Title</div>  
 	}
 
-	</div>
+    </div>
 
-	<div id="firstTabContent" class="contentDiv span9">  
-		@foreach (dynamic item in firstTabList) {
-      		<!--title-->
-      		<h2 class="subheader">@item.Title</h2>
-      		if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
-      			<!--version warning-->
-      			<div class="versionBox">
-                  	<img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
-      				<p class="versionText">@item.VersionBox1Text</p>
-      			</div>  
-      		} 
-      		<!--text-->
-      		<p>@item.Text</p>
+    <div id="firstTabContent" class="contentDiv span9">  
+        @foreach (dynamic item in firstTabList) {
+      	    <!--title-->
+      	    <h2 class="subheader">@item.Title</h2>
+      	    if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
+      	        <!--version warning-->
+      		<div class="versionBox">
+                    <img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
+      		    <p class="versionText">@item.VersionBox1Text</p>
+      		</div>  
+      	    } 
+      	    <!--text-->
+      	    <p>@item.Text</p>
             <!--user input for boxes, not displayed-->      
-      		<!--tipbox-->
-      		<p id="loop1Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>
-      		<!--infobox1-->
-      		<p id="loop1Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
-      		<p id="loop1Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
-      		<!--infobox2-->
-      		<p id="loop1Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
-      		<p id="loop1Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
-      		<!--infobox3-->
-      		<p id="loop1Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
-      		<p id="loop1Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	 		
-		}
-	</div>      
+      	    <!--tipbox-->
+      	    <p id="loop1Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>
+      	    <!--infobox1-->
+      	    <p id="loop1Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
+      	    <p id="loop1Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
+      	    <!--infobox2-->
+      	    <p id="loop1Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
+      	    <p id="loop1Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
+      	    <!--infobox3-->
+      	    <p id="loop1Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
+      	    <p id="loop1Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	 		
+        }
+    </div>      
 
-	<div id="secondTabContent" class="contentDiv span9">  
-		@foreach (dynamic item in secondTabList) {
-      		 <!--title-->
-      		<h2 class="subheader">@item.Title</h2>
-      		if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
-      			<!--version warning-->
-      			<div class="versionBox">
-                  	<img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
-      				<p class="versionText">@item.VersionBox1Text</p>
-      			</div>  
-      		}    
-      		<!--text-->
-      		<p>@item.Text</p>
+    <div id="secondTabContent" class="contentDiv span9">  
+        @foreach (dynamic item in secondTabList) {
+      	    <!--title-->
+      	    <h2 class="subheader">@item.Title</h2>
+      	    if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
+      	        <!--version warning-->
+      		<div class="versionBox">
+                    <img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
+      		    <p class="versionText">@item.VersionBox1Text</p>
+      		</div>  
+      	    }    
+      	    <!--text-->
+      	    <p>@item.Text</p>
             <!--user input for boxes, not displayed-->      
-      		<!--tipbox-->
-      		<p id="loop2Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
-      		<!--infobox1-->
-      		<p id="loop2Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
-      		<p id="loop2Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
-      		<!--infobox2-->
-      		<p id="loop2Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
-      		<p id="loop2Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
-      		<!--infobox3-->
-      		<p id="loop2Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
-      		<p id="loop2Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	
-		}
-	</div>      
+      	    <!--tipbox-->
+      	    <p id="loop2Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
+      	    <!--infobox1-->
+      	    <p id="loop2Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
+      	    <p id="loop2Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
+      	    <!--infobox2-->
+      	    <p id="loop2Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
+      	    <p id="loop2Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
+      	    <!--infobox3-->
+      	    <p id="loop2Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
+      	    <p id="loop2Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	
+        }
+    </div>      
   
 	<div id="thirdTabContent" class="contentDiv span9">  
 		@foreach (dynamic item in thirdTabList) {
