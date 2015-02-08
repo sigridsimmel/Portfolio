@@ -1,0 +1,1063 @@
+<link rel="stylesheet" href="/Files/Templates/ItemPublisher/ItemPublisher.css" />
+
+<style>
+  
+h2.subheader {
+  	font-size: 20px;
+	margin-top: 16px;
+}
+  
+#updateDiv {
+  	margin-top: 6px; 
+  	position: relative;
+  	float: right;
+  	color: #000;
+  	font-weight: bold;
+  	font-size: 14px;
+}
+  
+#pagetitle {
+  margin-left: -2px;
+}  
+  
+.margin {
+	margin-left: 5px;  
+}  
+  
+.introduction {
+	margin-bottom: 2em;
+}  
+
+.button {
+  	display: inline-block;
+	padding-top: 8px;
+  	padding-bottom: 8px;
+  	padding-left: 8px;
+  	padding-right: 8px;
+  	cursor: pointer;
+  	margin-bottom: 0px;
+  	margin-top: 2px;
+  	margin-right: -2px;
+  	border-width: 1px;
+  	border-color: #dbdbdb;
+  	border-bottom: none;
+  	z-index: -2;
+  	min-width: 14.3%;
+  	text-align: center;
+  	border-top-left-radius: 3px;
+  	border-top-right-radius: 3px;
+  	font-size: 14px;
+  	height: 24px;
+}
+  
+.contentDiv {
+	background-color: #f7f7f7;
+  	margin-top: -1px;
+  	margin-left: 0px;
+  	padding-top: 10px;
+  	padding-left: 10px;
+  	border: 1px solid #dbdbdb;
+  	z-index: -1;
+}
+  
+.image {
+	border-width: 1px;
+  	border-style: solid;
+  	border-color: grey;
+}
+ 
+.no-margin {
+	margin-left: 0px;  
+}
+  
+#tab-navigation {
+	z-index: 3000;
+  	position: relative;
+}  
+  
+#goToTop {
+  	display: none;
+  	padding-top: 7px;
+  	padding-bottom: 8px;
+  	cursor: pointer;
+  	background-color: #de7c00;
+  	color: white;
+  	text-align: center;
+  	border-radius: 3px;
+  	font-size: 14px;
+  	height: 22px;
+  	z-index: 3000;
+  	position: relative;
+  	width: 220px;
+}
+  
+#goToBottom {
+  	display: none;
+  	padding-top: 7px;
+  	padding-bottom: 8px;
+  	cursor: pointer;
+  	background-color: #de7c00;
+  	color: white;
+  	text-align: center;
+  	border-radius: 3px;
+  	font-size: 14px;
+  	height: 22px;
+  	z-index: 3001;
+  	position: fixed;
+  	width: 120px;
+}
+  
+.versionBox {
+  top: 0px;
+  height: 20px;
+  background-color: #f7f1e6;
+  padding: 8px 10px 10px 8px;
+  height: 100%;
+  display: inline-block;
+  margin-right: 6%;
+  margin-top: 15px;
+  border: 1px solid #de7c00;
+}
+  
+.versionText {
+	position: relative;
+  	float: rigth;
+  	margin-bottom: 0px;
+  	margin-left: 30px;
+  	margin-right: 8px;
+}
+  
+.versionImage {
+  	position: relative;
+  	float: left;
+  	margin-top: 2px;
+}  
+  
+.tipBox {
+  height: 20px;
+  background-color: #eaf1e1;
+  padding: 8px 10px 10px 8px;
+  height: 100%;
+  display: inline-block;
+  margin-right: 6%;
+  margin-top: 15px;
+  border: 1px solid #78be20;
+}
+  
+.tipImage {
+  	position: relative;
+  	float: left;
+  	margin-top: 2px;
+}
+  
+.tipText {
+	position: relative;
+  	float: rigth;
+  	margin-bottom: 0px;
+  	margin-left: 30px;
+  	margin-right: 8px;
+}  
+  
+.informationBox {
+  height: 20px;
+  background-color: #e6eff4;
+  padding: 8px 10px 10px 8px;
+  height: 100%;
+  display: inline-block;
+  margin-right: 6%;
+  margin-top: 15px;
+  border: 1px solid #0085ca;
+}
+  
+.informationImage {
+  	position: relative;
+  	float: left;
+  	margin-top: 2px;
+}
+  
+.informationHeader {
+	position: relative;
+  	float: rigth;
+  	margin-bottom: 0px;
+  	margin-left: 30px;
+  	font-weight: bold;
+}  
+  
+.informationText {
+	position: relative;
+  	float: rigth;
+  	margin-bottom: 0px;
+  	margin-left: 30px;
+  	margin-right: 8px;
+}  
+  
+.tipboxDisplay {
+	display: none;
+}   
+  
+.infoboxDisplay {
+	display: none;
+}  
+  
+</style>  
+
+<div class="span9">
+  
+	@{  
+  
+		var firstTabList = new List<dynamic>(); 
+		var secondTabList = new List<dynamic>();
+  		var thirdTabList = new List<dynamic>();
+  		var fourthTabList = new List<dynamic>();
+  		var fifthTabList = new List<dynamic>();
+	}
+  
+  	<div id="updateDiv">
+  		<p>Updated on: @GetDate("Item.UpdatedOn").ToShortDateString()</p>
+  	</div>
+  
+  	<div class="margin">
+		<h1 id="pagetitle" class="pagetitle">@GetValue("Item.Page_Title")</h1>
+  	</div> 
+  
+  	<div class="introduction margin">
+  		<p>@GetValue("Item.WhereTo_Start")</p>
+  	</div>  
+  
+	@foreach (var item in GetLoop("Item.Subjects")) {
+  
+		if (item.GetInteger("Item.Subjects.LoopCounter") == 1) {
+			{
+				//Add to list                        
+				firstTabList.Add(new {
+					Title = item.GetValue("Item.Subjects.Title"),
+  					Text = item.GetValue("Item.Subjects.Text"),
+  					VersionBox1Text = item.GetString("Item.Subjects.VersionBox1Text"),
+  					TipBox1Text = item.GetValue("Item.Subjects.TipBox1Text"),
+  					InfoBox1Header = item.GetValue("Item.Subjects.InfoBox1Header"),
+  					InfoBox1Text = item.GetValue("Item.Subjects.InfoBox1Text"),
+  					InfoBox2Header = item.GetValue("Item.Subjects.InfoBox2Header"),
+  					InfoBox2Text = item.GetValue("Item.Subjects.InfoBox2Text"),
+  					InfoBox3Header = item.GetValue("Item.Subjects.InfoBox3Header"),
+  					InfoBox3Text = item.GetValue("Item.Subjects.InfoBox3Text")
+				});
+			}       
+		}
+  
+		if (item.GetInteger("Item.Subjects.LoopCounter") == 2) {
+			{
+				//Add to list                        
+				secondTabList.Add(new {
+					Title = item.GetValue("Item.Subjects.Title"),
+  					Text = item.GetValue("Item.Subjects.Text"),
+  					VersionBox1Text = item.GetString("Item.Subjects.VersionBox1Text"),
+  					TipBox1Text = item.GetValue("Item.Subjects.TipBox1Text"),
+  					InfoBox1Header = item.GetValue("Item.Subjects.InfoBox1Header"),
+  					InfoBox1Text = item.GetValue("Item.Subjects.InfoBox1Text"),
+  					InfoBox2Header = item.GetValue("Item.Subjects.InfoBox2Header"),
+  					InfoBox2Text = item.GetValue("Item.Subjects.InfoBox2Text"),
+  					InfoBox3Header = item.GetValue("Item.Subjects.InfoBox3Header"),
+  					InfoBox3Text = item.GetValue("Item.Subjects.InfoBox3Text")
+				});
+			}       
+		}
+  
+  		if (item.GetInteger("Item.Subjects.LoopCounter") == 3) {
+			{
+				//Add to list                        
+				thirdTabList.Add(new {
+					Title = item.GetValue("Item.Subjects.Title"),
+  					Text = item.GetValue("Item.Subjects.Text"),
+  					VersionBox1Text = item.GetString("Item.Subjects.VersionBox1Text"),
+  					TipBox1Text = item.GetValue("Item.Subjects.TipBox1Text"),
+  					InfoBox1Header = item.GetValue("Item.Subjects.InfoBox1Header"),
+  					InfoBox1Text = item.GetValue("Item.Subjects.InfoBox1Text"),
+  					InfoBox2Header = item.GetValue("Item.Subjects.InfoBox2Header"),
+  					InfoBox2Text = item.GetValue("Item.Subjects.InfoBox2Text"),
+  					InfoBox3Header = item.GetValue("Item.Subjects.InfoBox3Header"),
+  					InfoBox3Text = item.GetValue("Item.Subjects.InfoBox3Text")
+				});
+			}       
+		}
+  
+  		if (item.GetInteger("Item.Subjects.LoopCounter") == 4) {
+			{
+				//Add to list                        
+				fourthTabList.Add(new {
+					Title = item.GetValue("Item.Subjects.Title"),
+  					Text = item.GetValue("Item.Subjects.Text"),
+  					VersionBox1Text = item.GetString("Item.Subjects.VersionBox1Text"),
+  					TipBox1Text = item.GetValue("Item.Subjects.TipBox1Text"),
+  					InfoBox1Header = item.GetValue("Item.Subjects.InfoBox1Header"),
+  					InfoBox1Text = item.GetValue("Item.Subjects.InfoBox1Text"),
+  					InfoBox2Header = item.GetValue("Item.Subjects.InfoBox2Header"),
+  					InfoBox2Text = item.GetValue("Item.Subjects.InfoBox2Text"),
+  					InfoBox3Header = item.GetValue("Item.Subjects.InfoBox3Header"),
+  					InfoBox3Text = item.GetValue("Item.Subjects.InfoBox3Text")
+				});
+			}       
+		} 
+  
+  		if (item.GetInteger("Item.Subjects.LoopCounter") == 5) {
+			{
+				//Add to list                        
+				fifthTabList.Add(new {
+					Title = item.GetValue("Item.Subjects.Title"),
+  					Text = item.GetValue("Item.Subjects.Text"),
+  					VersionBox1Text = item.GetString("Item.Subjects.VersionBox1Text"),
+  					TipBox1Text = item.GetValue("Item.Subjects.TipBox1Text"),
+  					InfoBox1Header = item.GetValue("Item.Subjects.InfoBox1Header"),
+  					InfoBox1Text = item.GetValue("Item.Subjects.InfoBox1Text"),
+  					InfoBox2Header = item.GetValue("Item.Subjects.InfoBox2Header"),
+  					InfoBox2Text = item.GetValue("Item.Subjects.InfoBox2Text"),
+  					InfoBox3Header = item.GetValue("Item.Subjects.InfoBox3Header"),
+  					InfoBox3Text = item.GetValue("Item.Subjects.InfoBox3Text")		
+				});
+			}       
+		}   
+	} 
+  
+  		<div id="goToTop" class="" type="button" onclick="scrollToTop()">Go to top</div>
+  		<div id="goToBottom" class="" type="button" onclick="scrollToBottom()">Go to Submenu</div>  
+      
+	<div id="tab-navigation" class="span9 no-margin"> 
+      
+	@foreach (dynamic item in firstTabList) {
+		<div id="firstTab" class="button" type="button" onclick="selectTab(1)">@item.Title</div>
+	}
+      
+	@foreach (dynamic item in secondTabList) {
+		<div id="secondTab" class="button" type="button" onclick="selectTab(2)">@item.Title</div>  
+	}
+      
+    @foreach (dynamic item in thirdTabList) {
+		<div id="thirdTab" class="button" type="button" onclick="selectTab(3)">@item.Title</div>  
+	}
+      
+    @foreach (dynamic item in fourthTabList) {
+		<div id="fourthTab" class="button" type="button" onclick="selectTab(4)">@item.Title</div>  
+	}
+      
+    @foreach (dynamic item in fifthTabList) {
+		<div id="fifthTab" class="button" type="button" onclick="selectTab(5)">@item.Title</div>  
+	}
+
+	</div>
+
+	<div id="firstTabContent" class="contentDiv span9">  
+		@foreach (dynamic item in firstTabList) {
+      		<!--title-->
+      		<h2 class="subheader">@item.Title</h2>
+      		if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
+      			<!--version warning-->
+      			<div class="versionBox">
+                  	<img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
+      				<p class="versionText">@item.VersionBox1Text</p>
+      			</div>  
+      		} 
+      		<!--text-->
+      		<p>@item.Text</p>
+            <!--user input for boxes, not displayed-->      
+      		<!--tipbox-->
+      		<p id="loop1Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>
+      		<!--infobox1-->
+      		<p id="loop1Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
+      		<p id="loop1Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
+      		<!--infobox2-->
+      		<p id="loop1Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
+      		<p id="loop1Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
+      		<!--infobox3-->
+      		<p id="loop1Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
+      		<p id="loop1Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	 		
+		}
+	</div>      
+
+	<div id="secondTabContent" class="contentDiv span9">  
+		@foreach (dynamic item in secondTabList) {
+      		 <!--title-->
+      		<h2 class="subheader">@item.Title</h2>
+      		if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
+      			<!--version warning-->
+      			<div class="versionBox">
+                  	<img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
+      				<p class="versionText">@item.VersionBox1Text</p>
+      			</div>  
+      		}    
+      		<!--text-->
+      		<p>@item.Text</p>
+            <!--user input for boxes, not displayed-->      
+      		<!--tipbox-->
+      		<p id="loop2Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
+      		<!--infobox1-->
+      		<p id="loop2Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
+      		<p id="loop2Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
+      		<!--infobox2-->
+      		<p id="loop2Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
+      		<p id="loop2Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
+      		<!--infobox3-->
+      		<p id="loop2Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
+      		<p id="loop2Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	
+		}
+	</div>      
+  
+	<div id="thirdTabContent" class="contentDiv span9">  
+		@foreach (dynamic item in thirdTabList) {
+      		<!--title-->
+      		<h2 class="subheader">@item.Title</h2>
+      		if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
+      			<!--version warning-->
+      			<div class="versionBox">
+                  	<img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
+      				<p class="versionText">@item.VersionBox1Text</p>
+      			</div>  
+      		}     
+      		<!--text-->
+      		<p>@item.Text</p>
+            <!--user input for boxes, not displayed-->      
+      		<!--tipbox-->
+      		<p id="loop3Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
+      		<!--infobox1-->
+      		<p id="loop3Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
+      		<p id="loop3Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
+      		<!--infobox2-->
+      		<p id="loop3Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
+      		<p id="loop3Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
+      		<!--infobox3-->
+      		<p id="loop3Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
+      		<p id="loop3Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>    		
+		}
+	</div>
+  
+	<div id="fourthTabContent" class="contentDiv span9">  
+		@foreach (dynamic item in fourthTabList) {
+      		<!--title-->
+      		<h2 class="subheader">@item.Title</h2>
+      		if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
+      			<!--version warning-->
+      			<div class="versionBox">
+                  	<img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
+      				<p class="versionText">@item.VersionBox1Text</p>
+      			</div>  
+      		}      
+      		<!--text-->
+      		<p>@item.Text</p> 
+            <!--user input for boxes, not displayed-->      
+      		<!--tipbox-->
+      		<p id="loop4Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
+      		<!--infobox1-->
+      		<p id="loop4Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
+      		<p id="loop4Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
+      		<!--infobox2-->
+      		<p id="loop4Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
+      		<p id="loop4Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
+      		<!--infobox3-->
+      		<p id="loop4Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
+      		<p id="loop4Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	    		
+		}
+	</div>  
+  
+	<div id="fifthTabContent" class="contentDiv span9">  
+		@foreach (dynamic item in fifthTabList) {
+      		<!--title-->
+      		<h2 class="subheader">@item.Title</h2>      		
+      		if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
+      			<!--version warning-->
+      			<div class="versionBox">
+                	<img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage">                
+      				<p class="versionText">@item.VersionBox1Text</p>
+      			</div>  
+      		}      
+      		<!--text-->
+      		<p>@item.Text</p> 
+            <!--user input for boxes, not displayed-->      
+      		<!--tipbox-->
+      		<p id="loop5Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
+      		<!--infobox1-->
+      		<p id="loop5Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
+      		<p id="loop5Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
+      		<!--infobox2-->
+      		<p id="loop5Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
+      		<p id="loop5Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
+      		<!--infobox3-->
+      		<p id="loop5Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
+      		<p id="loop5Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	   		
+		}
+	</div>    
+
+
+</div>
+
+<script>
+//media-queries  
+var mqXXLarge = window.matchMedia( "(min-width: 1507px)" );
+var mqXLarge = window.matchMedia( "(max-width: 1506px)" );
+var mqLarge = window.matchMedia( "(max-width: 1024px)" );
+var mqMedium = window.matchMedia( "(max-width: 977px)" );
+var mqSmall = window.matchMedia( "(max-width: 767px)" );
+  
+//"Go to top"-button
+var goToTop = document.getElementById("goToTop");
+var goToBottom = document.getElementById("goToBottom");  
+  
+if (mqSmall.matches) {
+	// window width is at least 500px
+  	goToBottom.style.display= "inline-block";
+  	goToBottom.style.right = "0px";
+  	goToBottom.style.top = "25px"
+}
+  
+else {
+	goToBottom.style.display= "none";  
+}  
+  
+  
+  // called when the window is scrolled    
+window.onscroll = function () {
+  	var top  = window.pageYOffset || document.documentElement.scrollTop;
+  	var tabNavigation = document.getElementById("tab-navigation");
+  	var tabButton = document.getElementsByClassName("button"); 	
+  
+	if (top >= 380) {  		
+  		tabNavigation.style.position = "fixed";
+  		tabNavigation.style.top = "45px";
+  
+  		for (var i = 0; i < tabButton.length; i++) {
+       		tabButton[i].style.borderRadius = "3px";
+    	}
+  
+  		if (mqSmall.matches) {
+    		tabNavigation.style.position = "relative";
+  			tabNavigation.style.top = "0px";
+  			tabNavigation.style.zIndex = "100";
+  			tabNavigation.style.marginBottom = "0px";
+  		}
+  		
+  	}
+  
+  	else {
+  		tabNavigation.style.position = "relative";
+  		tabNavigation.style.top = "0px";
+  
+  		for (var i = 0; i < tabButton.length; i++) {
+       		tabButton[i].style.borderBottomLeftRadius = "0px";
+  			tabButton[i].style.borderBottomRightRadius = "0px";
+    	}
+  	}
+  
+  	if (top >= 885) { 
+  		goToBottom.style.display= "none";
+  		goToTop.style.display = "inline-block";
+  		goToTop.style.position = "fixed";
+  		goToTop.style.top = "47px";
+  		goToTop.style.right = "66%";
+  		goToTop.style.width = "220px";
+  
+  		if (mqXXLarge.matches) {
+  			goToTop.style.right = "66%";
+  			goToTop.style.width = "220px";
+  		}
+  
+  		if (mqXLarge.matches) {
+  			goToTop.style.right = "71%";
+  			goToTop.style.width = "220px";
+  		}
+  
+  		if (mqLarge.matches) {
+  			goToTop.style.right = "75%";
+  		}
+    
+  		if (mqMedium.matches) {
+  			goToTop.style.width = "166px";
+  			goToTop.style.right = "73%";
+  		}
+  
+  		if (mqSmall.matches) {
+  			goToTop.style.display = "none";
+  			goToBottom.style.display = "inline-block";
+  			goToBottom.style.right = "0px";
+  			goToBottom.style.top = "45px"
+  		}
+  	}
+  
+	else if (mqSmall.matches) { 
+  			goToTop.style.display = "none";
+  			goToBottom.style.display = "inline-block";
+  			goToBottom.style.right = "0px";
+  			goToBottom.style.top = "45px"  
+  	} 
+
+  
+  	else {
+  		goToTop.style.display= "none";
+  		goToBottom.style.display= "none";
+  	}
+  
+}
+  
+function scrollToTop() {
+	window.scrollTo(0,0); 
+}
+  
+function scrollToBottom() {
+	window.scrollTo(0,document.body.scrollHeight);
+}  
+
+//make the first tab selected when you enter page  
+selectTab(1);   
+
+function selectTab(tab) {
+	var selectedTab;
+	var notSelectedTab1;
+  	var notSelectedTab2;
+  	var notSelectedTab3;
+  	var notSelectedTab4;
+  
+  	var displayedContent;
+  	var notDisplayedContent1;
+  	var notDisplayedContent2;
+  	var notDisplayedContent3;
+  	var notDisplayedContent4;
+  
+  	scrollToTop();
+  
+    if (tab == 1) {
+  
+  		//display infoboxes for this tab
+  		displayInfoboxes(1);
+  
+  		//display tipboxes for this tab
+  		displayTipboxes(1); 
+  
+  		selectedTab = document.getElementById("firstTab");
+		notSelectedTab1 = document.getElementById("secondTab");
+  		notSelectedTab2 = document.getElementById("thirdTab");
+  		notSelectedTab3 = document.getElementById("fourthTab");
+  		notSelectedTab4 = document.getElementById("fifthTab");
+  
+  		displayedContent = document.getElementById("firstTabContent");
+  		notDisplayedContent1 = document.getElementById("secondTabContent");
+  		notDisplayedContent2 = document.getElementById("thirdTabContent");
+  		notDisplayedContent3 = document.getElementById("fourthTabContent");
+  		notDisplayedContent4 = document.getElementById("fifthTabContent");
+  	}
+  
+  	if (tab == 2) {
+  
+  		//display infoboxes for this tab
+  		displayInfoboxes(2);
+  
+  		//display tipboxes for this tab
+  		displayTipboxes(2);  
+  
+  		selectedTab = document.getElementById("secondTab");
+		notSelectedTab1 = document.getElementById("firstTab");
+  		notSelectedTab2 = document.getElementById("thirdTab");
+  		notSelectedTab3 = document.getElementById("fourthTab");
+  		notSelectedTab4 = document.getElementById("fifthTab");
+  
+  		displayedContent = document.getElementById("secondTabContent");
+  		notDisplayedContent1 = document.getElementById("firstTabContent");
+  		notDisplayedContent2 = document.getElementById("thirdTabContent");
+  		notDisplayedContent3 = document.getElementById("fourthTabContent");
+  		notDisplayedContent4 = document.getElementById("fifthTabContent");
+  	}
+  
+	if (tab == 3) {
+  
+  		//display infoboxes for this tab
+  		displayInfoboxes(3); 
+  
+  		//display tipboxes for this tab
+  		displayTipboxes(3);  
+  		
+  		selectedTab = document.getElementById("thirdTab");
+		notSelectedTab1 = document.getElementById("firstTab");
+  		notSelectedTab2 = document.getElementById("secondTab");
+  		notSelectedTab3 = document.getElementById("fourthTab");
+  		notSelectedTab4 = document.getElementById("fifthTab");
+  
+  		displayedContent = document.getElementById("thirdTabContent");
+  		notDisplayedContent1 = document.getElementById("firstTabContent");
+  		notDisplayedContent2 = document.getElementById("secondTabContent");
+  		notDisplayedContent3 = document.getElementById("fourthTabContent");
+  		notDisplayedContent4 = document.getElementById("fifthTabContent");
+  	}
+  
+	if (tab == 4) {
+  
+  		//display infoboxes for this tab
+  		displayInfoboxes(4);
+  
+  		//display tipboxes for this tab
+  		displayTipboxes(4);  
+  
+  		selectedTab = document.getElementById("fourthTab");
+		notSelectedTab1 = document.getElementById("firstTab");
+  		notSelectedTab2 = document.getElementById("secondTab");
+  		notSelectedTab3 = document.getElementById("thirdTab");
+  		notSelectedTab4 = document.getElementById("fifthTab");
+  
+  		displayedContent = document.getElementById("fourthTabContent");
+  		notDisplayedContent1 = document.getElementById("firstTabContent");
+  		notDisplayedContent2 = document.getElementById("secondTabContent");
+  		notDisplayedContent3 = document.getElementById("thirdTabContent");
+  		notDisplayedContent4 = document.getElementById("fifthTabContent");
+  	}
+  
+	if (tab == 5) {
+  
+  		//display infoboxes for this tab
+  		displayInfoboxes(5); 
+  
+  		//display tipboxes for this tab
+  		displayTipboxes(5);  
+  
+  		selectedTab = document.getElementById("fifthTab");
+		notSelectedTab1 = document.getElementById("firstTab");
+  		notSelectedTab2 = document.getElementById("secondTab");
+  		notSelectedTab3 = document.getElementById("thirdTab");
+  		notSelectedTab4 = document.getElementById("fourthTab");
+  
+  		displayedContent = document.getElementById("fifthTabContent");
+  		notDisplayedContent1 = document.getElementById("firstTabContent");
+  		notDisplayedContent2 = document.getElementById("secondTabContent");
+  		notDisplayedContent3 = document.getElementById("thirdTabContent");
+  		notDisplayedContent4 = document.getElementById("fourthTabContent");
+  	}   
+
+  	displayedContent.style.display = "block";
+  	notDisplayedContent1.style.display = "none";
+  	notDisplayedContent2.style.display = "none";
+  	notDisplayedContent3.style.display = "none";
+  	notDisplayedContent4.style.display = "none";
+
+  	//selected tab button
+  	selectedTab.style.backgroundColor = "#f7f7f7";
+  	selectedTab.style.borderStyle = "solid";
+  	selectedTab.style.borderBottom = "none";
+  	selectedTab.style.fontWeight = "bold";
+  	selectedTab.style.color = "black";
+  
+	//not selected tab buttons
+  	notSelectedTab1.style.backgroundColor = "#8b8b8b";
+  	notSelectedTab1.style.borderStyle = "none";
+  	notSelectedTab1.style.fontWeight = "normal";
+  	notSelectedTab1.style.color = "white";
+  
+  	notSelectedTab2.style.backgroundColor = "#8b8b8b";
+  	notSelectedTab2.style.borderStyle = "none";
+  	notSelectedTab2.style.fontWeight = "normal";
+  	notSelectedTab2.style.color = "white";
+  
+  	notSelectedTab3.style.backgroundColor = "#8b8b8b";
+  	notSelectedTab3.style.borderStyle = "none";
+  	notSelectedTab3.style.fontWeight = "normal";
+  	notSelectedTab3.style.color = "white";
+  
+  	notSelectedTab4.style.backgroundColor = "#8b8b8b";
+  	notSelectedTab4.style.borderStyle = "none";
+  	notSelectedTab4.style.fontWeight = "normal";
+  	notSelectedTab4.style.color = "white";  
+}
+  
+function displayTipboxes (tabSelected) {
+  
+	var tipSign = "Files/Images/ParagraphIcons/tip_sign.png"
+   
+  	//find anchorpoints
+	var tipbox1Anchor =  document.getElementsByName("tipbox");
+  
+  	//create variables for user input infobox1
+  	var userInputTipbox1Text;
+  
+  	//find existing boxes
+	var existingTipboxes = document.getElementsByClassName("tipBox");
+
+  	//create new array
+	var elementsToRemove = [];
+  
+  	//place existing boxes in new array
+	for (var i = 0; i < existingTipboxes.length; i++) {
+        elementsToRemove.push(existingTipboxes[i]);
+    }
+  
+  	//remove existing boxes
+	for(var i = 0; i < elementsToRemove.length; i++) {
+    	elementsToRemove[i].parentNode.removeChild(elementsToRemove[i]);
+	}
+  
+  	if (tabSelected == 1) {
+  		//user input tipbox1		
+  		userInputTipbox1Text = document.getElementById("loop1Tipbox1Text").innerHTML;
+  	}
+  
+  	if (tabSelected == 2) {
+		//user input tipbox1		
+  		userInputTipbox1Text = document.getElementById("loop2Tipbox1Text").innerHTML;  
+  	}  	
+  
+  	if (tabSelected == 3) {
+  		userInputTipbox1Text = document.getElementById("loop3Tipbox1Text").innerHTML;    
+  	}
+  
+  	if (tabSelected == 4) {
+  		userInputTipbox1Text = document.getElementById("loop4Tipbox1Text").innerHTML;    
+  	}
+  
+  	if (tabSelected == 5) {
+  		userInputTipbox1Text = document.getElementById("loop5Tipbox1Text").innerHTML;    
+  	}   
+  
+	//create tipbox1	  
+    for (i = 0; i < tipbox1Anchor.length; i++) {
+  
+  		//create div
+  		var div = document.createElement( 'DIV' );
+  		//add class to div
+  		div.className = "tipBox";
+  
+  		//create image, add class and append it to div
+  		var img = document.createElement("img");
+  		img.src = tipSign;
+  		img.className = "tipImage";
+  		div.appendChild(img)
+  
+  		//create paragraph, add class and append it to div
+  		var p = document.createElement( 'p' );
+  		p.className = "tipText";
+  		div.appendChild(p)
+  
+  		//create textnode and append it to paragraph
+  		var textnode = document.createTextNode(userInputTipbox1Text);
+  		p.appendChild(textnode);
+
+  		//insert div before the anchor-element
+  		tipbox1Anchor[i].parentNode.insertBefore(div, tipbox1Anchor[i]); 
+  	}
+}  
+  
+function displayInfoboxes (tabSelected) {
+  
+	var informationSign = "Files/Images/ParagraphIcons/information_sign.png"
+   
+  	//find anchorpoints
+	var infobox1Anchor =  document.getElementsByName("infobox1");
+  	var infobox2Anchor =  document.getElementsByName("infobox2");
+  	var infobox3Anchor =  document.getElementsByName("infobox3");
+  
+  	//create variables for user input infobox1
+  	var userInputInfobox1Header;
+  	var userInputInfobox1Text;
+  
+  	//create variables for user input infobox2
+  	var userInputInfobox2Header;
+  	var userInputInfobox2Text;
+  
+  	//create variables for user input infobox3
+  	var userInputInfobox3Header;
+  	var userInputInfobox3Text;
+  
+  	//find existing boxes
+	var existingBoxes = document.getElementsByClassName("informationBox");
+
+  	//create new array
+	var elementsToRemove = [];
+  
+  	//place existing boxes in new array
+	for (var i = 0; i < existingBoxes.length; i++) {
+        elementsToRemove.push(existingBoxes[i]);
+    }
+  
+  	//remove existing boxes
+	for(var i = 0; i < elementsToRemove.length; i++) {
+    	elementsToRemove[i].parentNode.removeChild(elementsToRemove[i]);
+	}
+  
+  	if (tabSelected == 1) {
+  
+  		//user input infobox1		
+  		userInputInfobox1Header = document.getElementById("loop1Infobox1Header").innerHTML;
+  		userInputInfobox1Text = document.getElementById("loop1Infobox1Text").innerHTML;
+  
+  		//user input infobox2		
+  		userInputInfobox2Header = document.getElementById("loop1Infobox2Header").innerHTML;
+  		userInputInfobox2Text = document.getElementById("loop1Infobox2Text").innerHTML;
+  
+  		//user input infobox3		
+  		userInputInfobox3Header = document.getElementById("loop1Infobox3Header").innerHTML;
+  		userInputInfobox3Text = document.getElementById("loop1Infobox3Text").innerHTML;
+  	}
+  
+  	if (tabSelected == 2) {
+  
+  		//user input infobox1		
+  		userInputInfobox1Header = document.getElementById("loop2Infobox1Header").innerHTML;
+  		userInputInfobox1Text = document.getElementById("loop2Infobox1Text").innerHTML;
+  
+  		//user input infobox2		
+  		userInputInfobox2Header = document.getElementById("loop2Infobox2Header").innerHTML;
+  		userInputInfobox2Text = document.getElementById("loop2Infobox2Text").innerHTML;
+  
+  		//user input infobox3		
+  		userInputInfobox3Header = document.getElementById("loop2Infobox3Header").innerHTML;
+  		userInputInfobox3Text = document.getElementById("loop2Infobox3Text").innerHTML;
+  	}  	
+  
+  	if (tabSelected == 3) {
+  
+  		//user input infobox1
+  		userInputInfobox1Header = document.getElementById("loop3Infobox1Header").innerHTML;
+  		userInputInfobox1Text = document.getElementById("loop3Infobox1Text").innerHTML;
+  
+  		//user input infobox1
+  		userInputInfobox2Header = document.getElementById("loop3Infobox2Header").innerHTML;
+  		userInputInfobox2Text = document.getElementById("loop3Infobox2Text").innerHTML;
+  
+  		//user input infobox1
+  		userInputInfobox3Header = document.getElementById("loop3Infobox3Header").innerHTML;
+  		userInputInfobox3Text = document.getElementById("loop3Infobox3Text").innerHTML;
+  	}
+  
+  	if (tabSelected == 4) {
+  
+  		//user input infobox1
+  		userInputInfobox1Header = document.getElementById("loop4Infobox1Header").innerHTML;
+  		userInputInfobox1Text = document.getElementById("loop4Infobox1Text").innerHTML;
+  
+  		//user input infobox1
+  		userInputInfobox2Header = document.getElementById("loop4Infobox2Header").innerHTML;
+  		userInputInfobox2Text = document.getElementById("loop4Infobox2Text").innerHTML;
+  
+  		//user input infobox1
+  		userInputInfobox3Header = document.getElementById("loop4Infobox3Header").innerHTML;
+  		userInputInfobox3Text = document.getElementById("loop4Infobox3Text").innerHTML;
+  	}
+  
+  	if (tabSelected == 5) {
+  
+  		//user input infobox1
+  		userInputInfobox1Header = document.getElementById("loop5Infobox1Header").innerHTML;
+  		userInputInfobox1Text = document.getElementById("loop5Infobox1Text").innerHTML;
+  
+  		//user input infobox1
+  		userInputInfobox2Header = document.getElementById("loop5Infobox2Header").innerHTML;
+  		userInputInfobox2Text = document.getElementById("loop5Infobox2Text").innerHTML;
+  
+  		//user input infobox1
+  		userInputInfobox3Header = document.getElementById("loop5Infobox3Header").innerHTML;
+  		userInputInfobox3Text = document.getElementById("loop5Infobox3Text").innerHTML;
+  	}   
+  
+	//create infobox1	  
+    for (i = 0; i < infobox1Anchor.length; i++) {
+  
+  		//create div
+  		var div = document.createElement( 'DIV' );
+  		//add class to div
+  		div.className = "informationBox";
+  
+  		//create image, add class and append it to div
+  		var img = document.createElement("img");
+  		img.src = informationSign;
+  		img.className = "informationImage";
+  		div.appendChild(img)
+  
+  		//create paragraph, add class and append it to div
+  		var p = document.createElement( 'p' );
+  		p.className = "informationHeader";
+  		div.appendChild(p)
+  
+  		//create textnode and append it to paragraph
+  		var textnode = document.createTextNode(userInputInfobox1Header);
+  		p.appendChild(textnode);
+  
+  		//create paragraph, add class and append it to div
+  		var p = document.createElement( 'p' );
+  		p.className = "informationText";
+  		div.appendChild(p)
+  
+  		//create textnode and append it to paragraph
+  		var textnode = document.createTextNode(userInputInfobox1Text);
+  		p.appendChild(textnode);
+
+  		//insert div before the anchor-element
+  		infobox1Anchor[i].parentNode.insertBefore(div, infobox1Anchor[i]); 
+  	}
+  
+	//create infobox2	  
+    for (i = 0; i < infobox2Anchor.length; i++) {
+  
+  		//create div
+  		var div = document.createElement( 'DIV' );
+  		//add class to div
+  		div.className = "informationBox";
+  
+  		//create image, add class and append it to div
+  		var img = document.createElement("img");
+  		img.src = informationSign;
+  		img.className = "informationImage";
+  		div.appendChild(img)
+  
+  		//create paragraph, add class and append it to div
+  		var p = document.createElement( 'p' );
+  		p.className = "informationHeader";
+  		div.appendChild(p)
+  
+  		//create textnode and append it to paragraph
+  		var textnode = document.createTextNode(userInputInfobox2Header);
+  		p.appendChild(textnode);
+  
+  		//create paragraph, add class and append it to div
+  		var p = document.createElement( 'p' );
+  		p.className = "informationText";
+  		div.appendChild(p)
+  
+  		//create textnode and append it to paragraph
+  		var textnode = document.createTextNode(userInputInfobox2Text);
+  		p.appendChild(textnode);
+
+  		//insert div before the anchor-element
+  		infobox2Anchor[i].parentNode.insertBefore(div, infobox2Anchor[i]); 
+  	}
+  
+	//create infobox3	  
+    for (i = 0; i < infobox3Anchor.length; i++) {
+  
+  		//create div
+  		var div = document.createElement( 'DIV' );
+  		//add class to div
+  		div.className = "informationBox";
+  
+  		//create image, add class and append it to div
+  		var img = document.createElement("img");
+  		img.src = informationSign;
+  		img.className = "informationImage";
+  		div.appendChild(img)
+  
+  		//create paragraph, add class and append it to div
+  		var p = document.createElement( 'p' );
+  		p.className = "informationHeader";
+  		div.appendChild(p)
+  
+  		//create textnode and append it to paragraph
+  		var textnode = document.createTextNode(userInputInfobox3Header);
+  		p.appendChild(textnode);
+  
+  		//create paragraph, add class and append it to div
+  		var p = document.createElement( 'p' );
+  		p.className = "informationText";
+  		div.appendChild(p)
+  
+  		//create textnode and append it to paragraph
+  		var textnode = document.createTextNode(userInputInfobox3Text);
+  		p.appendChild(textnode);
+
+  		//insert div before the anchor-element
+  		infobox3Anchor[i].parentNode.insertBefore(div, infobox3Anchor[i]); 
+  	}  
+}
+   
+  
+
+  
+</script>  
