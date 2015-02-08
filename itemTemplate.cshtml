@@ -874,176 +874,173 @@ function displayInfoboxes (tabSelected) {
   	userInputInfobox3Text = document.getElementById("loop1Infobox3Text").innerHTML;
     }
   
-  	if (tabSelected == 2) {
+    if (tabSelected == 2) {
   
-  		//user input infobox1		
-  		userInputInfobox1Header = document.getElementById("loop2Infobox1Header").innerHTML;
-  		userInputInfobox1Text = document.getElementById("loop2Infobox1Text").innerHTML;
+        //user input infobox1		
+  	userInputInfobox1Header = document.getElementById("loop2Infobox1Header").innerHTML;
+  	userInputInfobox1Text = document.getElementById("loop2Infobox1Text").innerHTML;
   
-  		//user input infobox2		
-  		userInputInfobox2Header = document.getElementById("loop2Infobox2Header").innerHTML;
-  		userInputInfobox2Text = document.getElementById("loop2Infobox2Text").innerHTML;
+  	//user input infobox2		
+  	userInputInfobox2Header = document.getElementById("loop2Infobox2Header").innerHTML;
+  	userInputInfobox2Text = document.getElementById("loop2Infobox2Text").innerHTML;
   
-  		//user input infobox3		
-  		userInputInfobox3Header = document.getElementById("loop2Infobox3Header").innerHTML;
-  		userInputInfobox3Text = document.getElementById("loop2Infobox3Text").innerHTML;
-  	}  	
+  	//user input infobox3		
+  	userInputInfobox3Header = document.getElementById("loop2Infobox3Header").innerHTML;
+  	userInputInfobox3Text = document.getElementById("loop2Infobox3Text").innerHTML;
+    }  	
   
-  	if (tabSelected == 3) {
+    if (tabSelected == 3) {
   
-  		//user input infobox1
-  		userInputInfobox1Header = document.getElementById("loop3Infobox1Header").innerHTML;
-  		userInputInfobox1Text = document.getElementById("loop3Infobox1Text").innerHTML;
+        //user input infobox1
+  	userInputInfobox1Header = document.getElementById("loop3Infobox1Header").innerHTML;
+  	userInputInfobox1Text = document.getElementById("loop3Infobox1Text").innerHTML;
   
-  		//user input infobox1
-  		userInputInfobox2Header = document.getElementById("loop3Infobox2Header").innerHTML;
-  		userInputInfobox2Text = document.getElementById("loop3Infobox2Text").innerHTML;
+  	//user input infobox1
+  	userInputInfobox2Header = document.getElementById("loop3Infobox2Header").innerHTML;
+  	userInputInfobox2Text = document.getElementById("loop3Infobox2Text").innerHTML;
   
-  		//user input infobox1
-  		userInputInfobox3Header = document.getElementById("loop3Infobox3Header").innerHTML;
-  		userInputInfobox3Text = document.getElementById("loop3Infobox3Text").innerHTML;
-  	}
+  	//user input infobox1
+  	userInputInfobox3Header = document.getElementById("loop3Infobox3Header").innerHTML;
+  	userInputInfobox3Text = document.getElementById("loop3Infobox3Text").innerHTML;
+    }
   
-  	if (tabSelected == 4) {
+    if (tabSelected == 4) {
   
-  		//user input infobox1
-  		userInputInfobox1Header = document.getElementById("loop4Infobox1Header").innerHTML;
-  		userInputInfobox1Text = document.getElementById("loop4Infobox1Text").innerHTML;
+        //user input infobox1
+  	userInputInfobox1Header = document.getElementById("loop4Infobox1Header").innerHTML;
+  	userInputInfobox1Text = document.getElementById("loop4Infobox1Text").innerHTML;
   
-  		//user input infobox1
-  		userInputInfobox2Header = document.getElementById("loop4Infobox2Header").innerHTML;
-  		userInputInfobox2Text = document.getElementById("loop4Infobox2Text").innerHTML;
+  	//user input infobox1
+  	userInputInfobox2Header = document.getElementById("loop4Infobox2Header").innerHTML;
+  	userInputInfobox2Text = document.getElementById("loop4Infobox2Text").innerHTML;
   
-  		//user input infobox1
-  		userInputInfobox3Header = document.getElementById("loop4Infobox3Header").innerHTML;
-  		userInputInfobox3Text = document.getElementById("loop4Infobox3Text").innerHTML;
-  	}
+  	//user input infobox1
+  	userInputInfobox3Header = document.getElementById("loop4Infobox3Header").innerHTML;
+  	userInputInfobox3Text = document.getElementById("loop4Infobox3Text").innerHTML;
+    }
   
-  	if (tabSelected == 5) {
+    if (tabSelected == 5) {
   
-  		//user input infobox1
-  		userInputInfobox1Header = document.getElementById("loop5Infobox1Header").innerHTML;
-  		userInputInfobox1Text = document.getElementById("loop5Infobox1Text").innerHTML;
+        //user input infobox1
+  	userInputInfobox1Header = document.getElementById("loop5Infobox1Header").innerHTML;
+  	userInputInfobox1Text = document.getElementById("loop5Infobox1Text").innerHTML;
   
-  		//user input infobox1
-  		userInputInfobox2Header = document.getElementById("loop5Infobox2Header").innerHTML;
-  		userInputInfobox2Text = document.getElementById("loop5Infobox2Text").innerHTML;
+  	//user input infobox1
+  	userInputInfobox2Header = document.getElementById("loop5Infobox2Header").innerHTML;
+  	userInputInfobox2Text = document.getElementById("loop5Infobox2Text").innerHTML;
   
-  		//user input infobox1
-  		userInputInfobox3Header = document.getElementById("loop5Infobox3Header").innerHTML;
-  		userInputInfobox3Text = document.getElementById("loop5Infobox3Text").innerHTML;
-  	}   
+  	//user input infobox1
+  	userInputInfobox3Header = document.getElementById("loop5Infobox3Header").innerHTML;
+  	userInputInfobox3Text = document.getElementById("loop5Infobox3Text").innerHTML;
+    }   
   
-	//create infobox1	  
+    //create infobox1	  
     for (i = 0; i < infobox1Anchor.length; i++) {
   
-  		//create div
-  		var div = document.createElement( 'DIV' );
-  		//add class to div
-  		div.className = "informationBox";
+        //create div
+  	var div = document.createElement( 'DIV' );
+  	//add class to div
+  	div.className = "informationBox";
   
-  		//create image, add class and append it to div
-  		var img = document.createElement("img");
-  		img.src = informationSign;
-  		img.className = "informationImage";
-  		div.appendChild(img)
+  	//create image, add class and append it to div
+  	var img = document.createElement("img");
+  	img.src = informationSign;
+  	img.className = "informationImage";
+  	div.appendChild(img)
   
-  		//create paragraph, add class and append it to div
-  		var p = document.createElement( 'p' );
-  		p.className = "informationHeader";
-  		div.appendChild(p)
+  	//create paragraph, add class and append it to div
+  	var p = document.createElement( 'p' );
+  	p.className = "informationHeader";
+  	div.appendChild(p)
   
-  		//create textnode and append it to paragraph
-  		var textnode = document.createTextNode(userInputInfobox1Header);
-  		p.appendChild(textnode);
+  	//create textnode and append it to paragraph
+  	var textnode = document.createTextNode(userInputInfobox1Header);
+  	p.appendChild(textnode);
   
-  		//create paragraph, add class and append it to div
-  		var p = document.createElement( 'p' );
-  		p.className = "informationText";
-  		div.appendChild(p)
+  	//create paragraph, add class and append it to div
+  	var p = document.createElement( 'p' );
+  	p.className = "informationText";
+  	div.appendChild(p)
   
-  		//create textnode and append it to paragraph
-  		var textnode = document.createTextNode(userInputInfobox1Text);
-  		p.appendChild(textnode);
+  	//create textnode and append it to paragraph
+        var textnode = document.createTextNode(userInputInfobox1Text);
+  	p.appendChild(textnode);
 
-  		//insert div before the anchor-element
-  		infobox1Anchor[i].parentNode.insertBefore(div, infobox1Anchor[i]); 
-  	}
+  	//insert div before the anchor-element
+  	infobox1Anchor[i].parentNode.insertBefore(div, infobox1Anchor[i]); 
+    }
   
-	//create infobox2	  
+    //create infobox2	  
     for (i = 0; i < infobox2Anchor.length; i++) {
   
-  		//create div
-  		var div = document.createElement( 'DIV' );
-  		//add class to div
-  		div.className = "informationBox";
+        //create div
+  	var div = document.createElement( 'DIV' );
+  	//add class to div
+  	div.className = "informationBox";
   
-  		//create image, add class and append it to div
-  		var img = document.createElement("img");
-  		img.src = informationSign;
-  		img.className = "informationImage";
-  		div.appendChild(img)
+  	//create image, add class and append it to div
+  	var img = document.createElement("img");
+  	img.src = informationSign;
+  	img.className = "informationImage";
+  	div.appendChild(img)
   
-  		//create paragraph, add class and append it to div
-  		var p = document.createElement( 'p' );
-  		p.className = "informationHeader";
-  		div.appendChild(p)
+  	//create paragraph, add class and append it to div
+  	var p = document.createElement( 'p' );
+  	p.className = "informationHeader";
+  	div.appendChild(p)
   
-  		//create textnode and append it to paragraph
-  		var textnode = document.createTextNode(userInputInfobox2Header);
-  		p.appendChild(textnode);
+  	//create textnode and append it to paragraph
+  	var textnode = document.createTextNode(userInputInfobox2Header);
+  	p.appendChild(textnode);
   
-  		//create paragraph, add class and append it to div
-  		var p = document.createElement( 'p' );
-  		p.className = "informationText";
-  		div.appendChild(p)
+  	//create paragraph, add class and append it to div
+  	var p = document.createElement( 'p' );
+  	p.className = "informationText";
+  	div.appendChild(p)
   
-  		//create textnode and append it to paragraph
-  		var textnode = document.createTextNode(userInputInfobox2Text);
-  		p.appendChild(textnode);
+  	//create textnode and append it to paragraph
+  	var textnode = document.createTextNode(userInputInfobox2Text);
+  	p.appendChild(textnode);
 
-  		//insert div before the anchor-element
-  		infobox2Anchor[i].parentNode.insertBefore(div, infobox2Anchor[i]); 
-  	}
+  	//insert div before the anchor-element
+  	infobox2Anchor[i].parentNode.insertBefore(div, infobox2Anchor[i]); 
+    }
   
-	//create infobox3	  
+    //create infobox3	  
     for (i = 0; i < infobox3Anchor.length; i++) {
   
-  		//create div
-  		var div = document.createElement( 'DIV' );
-  		//add class to div
-  		div.className = "informationBox";
+        //create div
+  	var div = document.createElement( 'DIV' );
+  	//add class to div
+  	div.className = "informationBox";
   
-  		//create image, add class and append it to div
-  		var img = document.createElement("img");
-  		img.src = informationSign;
-  		img.className = "informationImage";
-  		div.appendChild(img)
+  	//create image, add class and append it to div
+  	var img = document.createElement("img");
+  	img.src = informationSign;
+  	img.className = "informationImage";
+  	div.appendChild(img)
   
-  		//create paragraph, add class and append it to div
-  		var p = document.createElement( 'p' );
-  		p.className = "informationHeader";
-  		div.appendChild(p)
+  	//create paragraph, add class and append it to div
+  	var p = document.createElement( 'p' );
+  	p.className = "informationHeader";
+  	div.appendChild(p)
   
-  		//create textnode and append it to paragraph
-  		var textnode = document.createTextNode(userInputInfobox3Header);
-  		p.appendChild(textnode);
+  	//create textnode and append it to paragraph
+  	var textnode = document.createTextNode(userInputInfobox3Header);
+  	p.appendChild(textnode);
   
-  		//create paragraph, add class and append it to div
-  		var p = document.createElement( 'p' );
-  		p.className = "informationText";
-  		div.appendChild(p)
+  	//create paragraph, add class and append it to div
+  	var p = document.createElement( 'p' );
+  	p.className = "informationText";
+  	div.appendChild(p)
   
-  		//create textnode and append it to paragraph
-  		var textnode = document.createTextNode(userInputInfobox3Text);
-  		p.appendChild(textnode);
+  	//create textnode and append it to paragraph
+  	var textnode = document.createTextNode(userInputInfobox3Text);
+  	p.appendChild(textnode);
 
-  		//insert div before the anchor-element
-  		infobox3Anchor[i].parentNode.insertBefore(div, infobox3Anchor[i]); 
-  	}  
+  	//insert div before the anchor-element
+  	infobox3Anchor[i].parentNode.insertBefore(div, infobox3Anchor[i]); 
+    }  
 }
    
-  
-
-  
 </script>  
