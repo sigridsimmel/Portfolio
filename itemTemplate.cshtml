@@ -200,7 +200,6 @@ h2.subheader {
 </style>  
 
 <div class="span9">
-  
     @{  
         var firstTabList = new List<dynamic>(); 
         var secondTabList = new List<dynamic>();
@@ -396,91 +395,89 @@ h2.subheader {
         }
     </div>      
   
-	<div id="thirdTabContent" class="contentDiv span9">  
-		@foreach (dynamic item in thirdTabList) {
-      		<!--title-->
-      		<h2 class="subheader">@item.Title</h2>
-      		if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
-      			<!--version warning-->
-      			<div class="versionBox">
-                  	<img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
-      				<p class="versionText">@item.VersionBox1Text</p>
-      			</div>  
-      		}     
-      		<!--text-->
-      		<p>@item.Text</p>
+    <div id="thirdTabContent" class="contentDiv span9">  
+        @foreach (dynamic item in thirdTabList) {
+      	    <!--title-->
+      	    <h2 class="subheader">@item.Title</h2>
+      	    if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
+      	        <!--version warning-->
+      		<div class="versionBox">
+                    <img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
+      		    <p class="versionText">@item.VersionBox1Text</p>
+      		</div>  
+      	    }     
+      	    <!--text-->
+      	    <p>@item.Text</p>
             <!--user input for boxes, not displayed-->      
-      		<!--tipbox-->
-      		<p id="loop3Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
-      		<!--infobox1-->
-      		<p id="loop3Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
-      		<p id="loop3Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
-      		<!--infobox2-->
-      		<p id="loop3Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
-      		<p id="loop3Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
-      		<!--infobox3-->
-      		<p id="loop3Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
-      		<p id="loop3Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>    		
-		}
-	</div>
+      	    <!--tipbox-->
+      	    <p id="loop3Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
+      	    <!--infobox1-->
+      	    <p id="loop3Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
+      	    <p id="loop3Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
+      	    <!--infobox2-->
+      	    <p id="loop3Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
+      	    <p id="loop3Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
+      	    <!--infobox3-->
+      	    <p id="loop3Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
+      	    <p id="loop3Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>    		
+	}
+    </div>
   
-	<div id="fourthTabContent" class="contentDiv span9">  
-		@foreach (dynamic item in fourthTabList) {
-      		<!--title-->
-      		<h2 class="subheader">@item.Title</h2>
-      		if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
-      			<!--version warning-->
-      			<div class="versionBox">
-                  	<img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
-      				<p class="versionText">@item.VersionBox1Text</p>
-      			</div>  
-      		}      
-      		<!--text-->
-      		<p>@item.Text</p> 
+    <div id="fourthTabContent" class="contentDiv span9">  
+        @foreach (dynamic item in fourthTabList) {
+      	    <!--title-->
+      	    <h2 class="subheader">@item.Title</h2>
+      	    if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
+      	        <!--version warning-->
+      		<div class="versionBox">
+                    <img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage"> 
+      		    <p class="versionText">@item.VersionBox1Text</p>
+      		</div>  
+      	    }      
+      	    <!--text-->
+      	    <p>@item.Text</p> 
             <!--user input for boxes, not displayed-->      
-      		<!--tipbox-->
-      		<p id="loop4Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
-      		<!--infobox1-->
-      		<p id="loop4Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
-      		<p id="loop4Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
-      		<!--infobox2-->
-      		<p id="loop4Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
-      		<p id="loop4Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
-      		<!--infobox3-->
-      		<p id="loop4Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
-      		<p id="loop4Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	    		
-		}
-	</div>  
+      	    <!--tipbox-->
+      	    <p id="loop4Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
+      	    <!--infobox1-->
+      	    <p id="loop4Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
+      	    <p id="loop4Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
+      	    <!--infobox2-->
+      	    <p id="loop4Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
+      	    <p id="loop4Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
+      	    <!--infobox3-->
+      	    <p id="loop4Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
+      	    <p id="loop4Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	    		
+	}
+    </div>  
   
-	<div id="fifthTabContent" class="contentDiv span9">  
-		@foreach (dynamic item in fifthTabList) {
-      		<!--title-->
-      		<h2 class="subheader">@item.Title</h2>      		
-      		if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
-      			<!--version warning-->
-      			<div class="versionBox">
-                	<img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage">                
-      				<p class="versionText">@item.VersionBox1Text</p>
-      			</div>  
-      		}      
-      		<!--text-->
-      		<p>@item.Text</p> 
+    <div id="fifthTabContent" class="contentDiv span9">  
+        @foreach (dynamic item in fifthTabList) {
+      	    <!--title-->
+      	    <h2 class="subheader">@item.Title</h2>      		
+      	    if (!string.IsNullOrWhiteSpace(@item.VersionBox1Text)) {
+      	        <!--version warning-->
+      		<div class="versionBox">
+                    <img src="Files/Images/ParagraphIcons/warning_sign.png" alt="Version" class="versionImage">                
+      		    <p class="versionText">@item.VersionBox1Text</p>
+      		</div>  
+      	    }      
+      	    <!--text-->
+      	    <p>@item.Text</p> 
             <!--user input for boxes, not displayed-->      
-      		<!--tipbox-->
-      		<p id="loop5Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
-      		<!--infobox1-->
-      		<p id="loop5Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
-      		<p id="loop5Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
-      		<!--infobox2-->
-      		<p id="loop5Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
-      		<p id="loop5Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
-      		<!--infobox3-->
-      		<p id="loop5Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
-      		<p id="loop5Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	   		
-		}
-	</div>    
-
-
+      	    <!--tipbox-->
+      	    <p id="loop5Tipbox1Text" class="tipboxDisplay">@item.TipBox1Text</p>      
+      	    <!--infobox1-->
+      	    <p id="loop5Infobox1Header" class="infoboxDisplay">@item.InfoBox1Header</p>
+      	    <p id="loop5Infobox1Text" class="infoboxDisplay">@item.InfoBox1Text</p>
+      	    <!--infobox2-->
+      	    <p id="loop5Infobox2Header" class="infoboxDisplay">@item.InfoBox2Header</p>
+      	    <p id="loop5Infobox2Text" class="infoboxDisplay">@item.InfoBox2Text</p>
+      	    <!--infobox3-->
+      	    <p id="loop5Infobox3Header" class="infoboxDisplay">@item.InfoBox3Header</p>
+      	    <p id="loop5Infobox3Text" class="infoboxDisplay">@item.InfoBox3Text</p>	   		
+	}
+    </div>    
 </div>
 
 <script>
