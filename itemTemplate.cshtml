@@ -493,98 +493,93 @@ var goToTop = document.getElementById("goToTop");
 var goToBottom = document.getElementById("goToBottom");  
   
 if (mqSmall.matches) {
-	// window width is at least 500px
-  	goToBottom.style.display= "inline-block";
-  	goToBottom.style.right = "0px";
-  	goToBottom.style.top = "25px"
+    // window width is at least 500px
+    goToBottom.style.display= "inline-block";
+    goToBottom.style.right = "0px";
+    goToBottom.style.top = "25px"
 }
-  
 else {
-	goToBottom.style.display= "none";  
+    goToBottom.style.display= "none";  
 }  
   
-  
-  // called when the window is scrolled    
+// called when the window is scrolled    
 window.onscroll = function () {
-  	var top  = window.pageYOffset || document.documentElement.scrollTop;
-  	var tabNavigation = document.getElementById("tab-navigation");
-  	var tabButton = document.getElementsByClassName("button"); 	
+    var top  = window.pageYOffset || document.documentElement.scrollTop;
+    var tabNavigation = document.getElementById("tab-navigation");
+    var tabButton = document.getElementsByClassName("button"); 	
   
-	if (top >= 380) {  		
-  		tabNavigation.style.position = "fixed";
-  		tabNavigation.style.top = "45px";
+    if (top >= 380) {  		
+        tabNavigation.style.position = "fixed";
+  	tabNavigation.style.top = "45px";
   
-  		for (var i = 0; i < tabButton.length; i++) {
-       		tabButton[i].style.borderRadius = "3px";
+  	for (var i = 0; i < tabButton.length; i++) {
+       	    tabButton[i].style.borderRadius = "3px";
+        }
+  
+        if (mqSmall.matches) {
+            tabNavigation.style.position = "relative";
+  	    tabNavigation.style.top = "0px";
+  	    tabNavigation.style.zIndex = "100";
+  	    tabNavigation.style.marginBottom = "0px";
+        }
+    }
+  
+    else {
+        tabNavigation.style.position = "relative";
+  	tabNavigation.style.top = "0px";
+  
+  	for (var i = 0; i < tabButton.length; i++) {
+       	    tabButton[i].style.borderBottomLeftRadius = "0px";
+  	    tabButton[i].style.borderBottomRightRadius = "0px";
     	}
+    }
   
-  		if (mqSmall.matches) {
-    		tabNavigation.style.position = "relative";
-  			tabNavigation.style.top = "0px";
-  			tabNavigation.style.zIndex = "100";
-  			tabNavigation.style.marginBottom = "0px";
-  		}
-  		
+    if (top >= 885) { 
+        goToBottom.style.display= "none";
+  	goToTop.style.display = "inline-block";
+  	goToTop.style.position = "fixed";
+  	goToTop.style.top = "47px";
+  	goToTop.style.right = "66%";
+  	goToTop.style.width = "220px";
+  
+  	if (mqXXLarge.matches) {
+  	    goToTop.style.right = "66%";
+  	    goToTop.style.width = "220px";
   	}
   
-  	else {
-  		tabNavigation.style.position = "relative";
-  		tabNavigation.style.top = "0px";
-  
-  		for (var i = 0; i < tabButton.length; i++) {
-       		tabButton[i].style.borderBottomLeftRadius = "0px";
-  			tabButton[i].style.borderBottomRightRadius = "0px";
-    	}
+  	if (mqXLarge.matches) {
+  	    goToTop.style.right = "71%";
+  	    goToTop.style.width = "220px";
   	}
   
-  	if (top >= 885) { 
-  		goToBottom.style.display= "none";
-  		goToTop.style.display = "inline-block";
-  		goToTop.style.position = "fixed";
-  		goToTop.style.top = "47px";
-  		goToTop.style.right = "66%";
-  		goToTop.style.width = "220px";
-  
-  		if (mqXXLarge.matches) {
-  			goToTop.style.right = "66%";
-  			goToTop.style.width = "220px";
-  		}
-  
-  		if (mqXLarge.matches) {
-  			goToTop.style.right = "71%";
-  			goToTop.style.width = "220px";
-  		}
-  
-  		if (mqLarge.matches) {
-  			goToTop.style.right = "75%";
-  		}
+  	if (mqLarge.matches) {
+  	    goToTop.style.right = "75%";
+  	}
     
-  		if (mqMedium.matches) {
-  			goToTop.style.width = "166px";
-  			goToTop.style.right = "73%";
-  		}
-  
-  		if (mqSmall.matches) {
-  			goToTop.style.display = "none";
-  			goToBottom.style.display = "inline-block";
-  			goToBottom.style.right = "0px";
-  			goToBottom.style.top = "45px"
-  		}
+  	if (mqMedium.matches) {
+  	    goToTop.style.width = "166px";
+  	    goToTop.style.right = "73%";
   	}
   
-	else if (mqSmall.matches) { 
-  			goToTop.style.display = "none";
-  			goToBottom.style.display = "inline-block";
-  			goToBottom.style.right = "0px";
-  			goToBottom.style.top = "45px"  
-  	} 
+  	if (mqSmall.matches) {
+  	    goToTop.style.display = "none";
+  	    goToBottom.style.display = "inline-block";
+  	    goToBottom.style.right = "0px";
+  	    goToBottom.style.top = "45px"
+  	}
+    }
+  
+    else if (mqSmall.matches) { 
+        goToTop.style.display = "none";
+  	goToBottom.style.display = "inline-block";
+  	goToBottom.style.right = "0px";
+  	goToBottom.style.top = "45px"  
+    } 
 
-  
-  	else {
-  		goToTop.style.display= "none";
-  		goToBottom.style.display= "none";
-  	}
-  
+    else {
+        goToTop.style.display= "none";
+  	goToBottom.style.display= "none";
+    }
 }
   
 function scrollToTop() {
